@@ -1,8 +1,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './App';
+import AppRouter from './AppRouter';
 import registerServiceWorker from './registerServiceWorker';
-ReactDOM.render(<App hello="world" />, document.getElementById(
-  'root'
-) as HTMLElement);
+const { BrowserRouter } = require('react-router-dom');
+import './injectGlobal';
+ReactDOM.render(
+  <BrowserRouter>
+    <AppRouter />
+  </BrowserRouter>,
+  document.getElementById('root') as HTMLElement
+);
 registerServiceWorker();

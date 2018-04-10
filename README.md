@@ -1,2 +1,3 @@
 # Roadster
-An uber-like progressive web app.
+
+A ride-sharing progressive web app.
