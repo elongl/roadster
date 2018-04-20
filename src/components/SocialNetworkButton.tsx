@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { Button, ButtonProps } from 'semantic-ui-react';
-const SocialNetworkButton = (props: Props) => (
+const SocialNetworkButton: React.StatelessComponent<ButtonProps> = props => (
   <Button
     icon={props.colorAndIcon}
     style={{ marginBottom: 15, width: 265 }}
@@ -9,8 +9,4 @@ const SocialNetworkButton = (props: Props) => (
     content={`Sign in with ${props.content}`}
   />
 );
-interface Props {
-  content: ButtonProps['content'];
-  colorAndIcon: ButtonProps['color'] | ButtonProps['icon'];
-}
 export default SocialNetworkButton;

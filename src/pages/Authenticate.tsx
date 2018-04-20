@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { Transition } from 'semantic-ui-react';
+import React from 'react';
 import SocialNetworkButton from '../components/SocialNetworkButton';
+import EntryTransition from '../components/EntryTransition';
 
-const Authenticate = () => (
+const Authenticate: React.StatelessComponent = () => (
   <div
     style={{
       display: 'flex',
@@ -21,7 +21,7 @@ const Authenticate = () => (
     >
       roadster
     </h1>
-    <Transition duration={2000} animation="fade up" transitionOnMount={true}>
+    <EntryTransition animation="fade up" duration={2750}>
       <p
         style={{
           width: '85%',
@@ -34,7 +34,7 @@ const Authenticate = () => (
         <span style={{ fontWeight: 700, fontStyle: 'italic' }}>Roadster </span>
         is an app that allows you to share a ride with people nearby you.
       </p>
-    </Transition>
+    </EntryTransition>
     <div
       style={{
         display: 'flex',
