@@ -12,10 +12,10 @@ import getUser from './api/getUser';
 
 interface State {
   loading: boolean;
-  user: UserDetails | boolean;
+  user: UserDetails | undefined;
 }
 class AppRouter extends Component<RouteComponentProps<{}>, State> {
-  state = { loading: true, user: false };
+  state = { loading: true, user: undefined };
   async componentDidMount() {
     const user: UserDetails = await getUser();
 
@@ -23,7 +23,6 @@ class AppRouter extends Component<RouteComponentProps<{}>, State> {
       this.setState({ user });
     } else {
       this.props.history.push('/login');
-      this.setState({ user: false });
     }
     this.setState({ loading: false });
   }
