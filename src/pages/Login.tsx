@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { StatelessComponent } from 'react';
 import SocialNetworkButton from '../components/SocialNetworkButton';
 import EntryTransition from '../components/EntryTransition';
 
-const Authenticate: React.StatelessComponent = () => (
+const Login: StatelessComponent = () => (
   <div
     style={{
       display: 'flex',
@@ -44,10 +44,10 @@ const Authenticate: React.StatelessComponent = () => (
       }}
     >
       <h1 style={{ color: 'white', marginTop: '1rem' }}>Get Started</h1>
-      <SocialNetworkButton content="Google" colorAndIcon="google plus" />
-      <SocialNetworkButton content="Facebook" colorAndIcon="facebook" />
-      <SocialNetworkButton content="Twitter" colorAndIcon="twitter" />
+      <SocialNetworkButton name="Google" colorAndIcon="google plus" />
+      <SocialNetworkButton name="Facebook" colorAndIcon="facebook" />
+      <SocialNetworkButton name="Twitter" colorAndIcon="twitter" />
     </div>
   </div>
 );
-export default Authenticate;
+export default Login;

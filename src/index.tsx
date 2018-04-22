@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRouter from './AppRouter';
 import registerServiceWorker from './registerServiceWorker';
-const { BrowserRouter } = require('react-router-dom');
+import { BrowserRouter } from 'react-router-dom';
 import './injectGlobal';
 ReactDOM.render(
   <BrowserRouter>

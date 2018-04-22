@@ -1,32 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Switch,
   Route,
   withRouter,
   RouteComponentProps
 } from 'react-router-dom';
-import Authenticate from './pages/Authenticate';
-import axios from 'axios';
+import UserDetails from './ORM/UserDetails';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import getUser from './api/getUser';
 
-interface RouteProps {}
-export default withRouter(
-  class App extends React.Component<RouteComponentProps<RouteProps>> {
-    async componentDidMount() {
-      const { data: user } = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/auth/user`,
-        { withCredentials: true }
-      );
-      if (!Boolean(user)) {
-        this.props.history.push('/authenticate');
-      }
-    }
+interface State {
+  loading: boolean;
+  user: UserDetails | boolean;
+}
+class AppRouter extends Component<RouteComponentProps<{}>, State> {
+  state = { loading: true, user: false };
+  async componentDidMount() {
+    const user: UserDetails = await getUser();
 
-    render() {
-      return (
-        <Switch>
-          <Route exact={true} path="/authenticate" component={Authenticate} />
-        </Switch>
-      );
+    if (user) {
+      this.setState({ user });
+    } else {
+      this.props.history.push('/login');
+      this.setState({ user: false });
     }
+    this.setState({ loading: false });
   }
-);
+
+  render() {
+    if (this.state.loading) {
+      return null;
+    }
+    return (
+      <Switch>
+        <Route
+          exact={true}
+          path="/"
+          render={user => <Home user={this.state.user} />}
+        />
+        <Route exact={true} path="/login" component={Login} />
+      </Switch>
+    );
+  }
+}
+
+export default withRouter(AppRouter);

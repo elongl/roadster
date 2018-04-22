@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { StatelessComponent } from 'react';
 import { Button, ButtonProps } from 'semantic-ui-react';
-const SocialNetworkButton: React.StatelessComponent<ButtonProps> = props => (
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+
+interface Props {
+  colorAndIcon: ButtonProps['color'] | ButtonProps['icon'];
+  name: string;
+}
+
+const SocialNetworkButton: StatelessComponent<
+  Props & RouteComponentProps<{}>
+> = props => (
   <Button
     icon={props.colorAndIcon}
-    style={{ marginBottom: 15, width: 265 }}
+    style={{ marginBottom: '1rem', width: '19rem' }}
     size="big"
     color={props.colorAndIcon}
-    content={`Sign in with ${props.content}`}
+    content={`Sign in with ${props.name}`}
+    onClick={() => {
+      window.location.replace(
+        process.env.REACT_APP_SERVER_URL + '/auth/' + props.name
+      );
+    }}
   />
 );
-export default SocialNetworkButton;
+export default withRouter(SocialNetworkButton);
