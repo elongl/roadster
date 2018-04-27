@@ -14,10 +14,11 @@ interface State {
   loading: boolean;
   user: UserDetails | undefined;
 }
+
 class AppRouter extends Component<RouteComponentProps<{}>, State> {
   state = { loading: true, user: undefined };
   async componentDidMount() {
-    const user: UserDetails = await getUser();
+    const user = await getUser();
 
     if (user) {
       this.setState({ user });

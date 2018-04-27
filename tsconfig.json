@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strict": true,
     "outDir": "build/dist",
     "module": "esnext",
     "target": "es5",
