@@ -1,12 +1,9 @@
-import UserDetails from '../ORM/UserDetails';
-import axios from 'axios';
+import UserDetails from '../typing/UserDetails';
+import request from './request';
 
 const getUser = async (): Promise<UserDetails | undefined> => {
   try {
-    const { data: user } = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/auth/user`,
-      { withCredentials: true }
-    );
+    const { data: user } = await request.get('/auth/user', { withCredentials: true });
     return user;
   } catch (err) {
     console.error(err);
