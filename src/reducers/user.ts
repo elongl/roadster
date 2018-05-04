@@ -1,7 +1,7 @@
-import { Action, Reducer } from 'redux';
+import { UserAction } from '../actions/user';
 import UserDetails from '../typing/UserDetails';
 
-const user: Reducer<null | UserDetails, UserAction> = (state = null, action) => {
+const user = (state: UserDetails | null = null, action: UserAction) => {
   switch (action.type) {
     case 'SERIALIZE_USER':
       return action.user;
@@ -11,8 +11,5 @@ const user: Reducer<null | UserDetails, UserAction> = (state = null, action) => 
       return state;
   }
 };
-export default user;
 
-interface UserAction extends Action {
-  user: UserDetails;
-}
+export default user;
