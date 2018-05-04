@@ -14,6 +14,7 @@
     "jsx-no-lambda": false,
     "jsx-curly-spacing": "always",
     "jsx-no-multiline-js": false,
+    "jsx-boolean-value": ["never"],
     "label-position": true,
     "max-line-length": [true, 120],
     "member-ordering": [
@@ -25,16 +26,7 @@
     "no-any": true,
     "no-arg": true,
     "no-bitwise": true,
-    "no-console": [
-      false,
-      "log",
-      "error",
-      "debug",
-      "info",
-      "time",
-      "timeEnd",
-      "trace"
-    ],
+    "no-console": [false, "log", "error", "debug", "info", "time", "timeEnd", "trace"],
     "no-consecutive-blank-lines": true,
     "no-construct": true,
     "no-debugger": true,

@@ -1,30 +1,14 @@
 import React, { Component } from 'react';
-import {
-  Switch,
-  Route,
-  withRouter,
-  RouteComponentProps
-} from 'react-router-dom';
-import UserDetails from './ORM/UserDetails';
+import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
-import Home from './pages/Home';
-import getUser from './api/getUser';
+import Profile from './pages/Profile';
+import appStart from './appStart';
 
-interface State {
-  loading: boolean;
-  user: UserDetails | undefined;
-}
+class AppRouter extends Component {
+  state = { loading: true };
 
-class AppRouter extends Component<RouteComponentProps<{}>, State> {
-  state = { loading: true, user: undefined };
   async componentDidMount() {
-    const user = await getUser();
-
-    if (user) {
-      this.setState({ user });
-    } else {
-      this.props.history.push('/login');
-    }
+    await appStart();
     this.setState({ loading: false });
   }
 
@@ -34,15 +18,11 @@ class AppRouter extends Component<RouteComponentProps<{}>, State> {
     }
     return (
       <Switch>
-        <Route
-          exact={true}
-          path="/"
-          render={user => <Home user={this.state.user} />}
-        />
-        <Route exact={true} path="/login" component={Login} />
+        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/login" component={Login} />
       </Switch>
     );
   }
 }
 
-export default withRouter(AppRouter);
+export default AppRouter;
