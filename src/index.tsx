@@ -1,19 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRouter from './AppRouter';
-import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 import './injectGlobal';
+// import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <AppRouter />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root') as HTMLElement
 );
 
-// Hot Module Replacement
+/*
+Development Mode...
+registerServiceWorker();
 if (module.hot) {
   module.hot.accept();
 }
-registerServiceWorker();
+*/
