@@ -1,22 +1,13 @@
-import React from 'react';
-import UserDetails from '../typing/UserDetails';
+import React, { StatelessComponent } from 'react';
 import AppState from '../typing/AppState';
+import flexCenter from '../styles/flexCenter';
 import { connect } from 'react-redux';
 import { Image } from 'semantic-ui-react';
 
-const Profile: React.StatelessComponent<{
-  user: UserDetails | null;
+const Profile: StatelessComponent<{
+  user: AppState['user'];
 }> = props => (
-  <div
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: 'white',
-      height: '100vh'
-    }}
-  >
+  <div style={{ ...flexCenter, color: 'white' }}>
     {props.user ? (
       <>
         <Image
