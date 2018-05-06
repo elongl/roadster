@@ -1,5 +1,5 @@
 import React, { StatelessComponent } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
 const IsDriverForm: StatelessComponent<{
   changeIsDriver: (isDriver: boolean) => void;
@@ -21,10 +21,12 @@ const IsDriverForm: StatelessComponent<{
     </h3>
     <Button.Group size="huge">
       <Button primary onClick={() => props.changeIsDriver(true)}>
+        <Icon name="checkmark" />
         Yes
       </Button>
       <Button.Or />
       <Button secondary onClick={() => props.changeIsDriver(true)}>
+        <Icon name="remove" />
         No
       </Button>
     </Button.Group>
