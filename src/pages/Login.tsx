@@ -3,10 +3,14 @@ import Registration from '../components/Registration';
 import { connect } from 'react-redux';
 import AppState from '../typings/AppState';
 import Introduction from '../components/Introduction';
+import { Redirect } from 'react-router';
 
 const Login: StatelessComponent<{ user: AppState['user'] }> = ({ user }) => {
   if (user && (user.isDriver === null || user.phoneNumber === null)) {
     return <Registration user={user} />;
+  }
+  if (user) {
+    return <Redirect to="/" />;
   }
   return <Introduction />;
 };

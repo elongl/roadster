@@ -3,9 +3,9 @@ import PhoneNumberForm from './PhoneNumberForm';
 import IsDriverForm from './IsDriverForm';
 import viewportCenter from '../styles/viewportCenter';
 import AppState from '../typings/AppState';
-// import updateUser from '../api/updateUser';
+import updateUser from '../api/updateUser';
 
-export default class Registration extends Component<
+class Registration extends Component<
   { user: AppState['user'] },
   { stage: number; phoneNumber: string; isDriver: boolean | undefined }
 > {
@@ -20,20 +20,25 @@ export default class Registration extends Component<
   };
 
   changeIsDriver = (isDriver: boolean) => {
-    this.setState({ isDriver });
-    // this.updateUser();
+    this.setState({ isDriver }, () => this.updateUser());
   };
-  /*
+
   updateUser = () => {
-    updateUser.then(() => this.pushStage());
+    const phoneNumber = this.state.phoneNumber.replace('-', '');
+    const { isDriver } = this.state;
+    const { user } = this.props;
+    if (user) {
+      updateUser(user.id, { phoneNumber, isDriver }).then(() => this.pushStage());
+      setTimeout(() => location.reload(), 2500);
+    }
   };
-  */
 
   pushStage = () => {
     this.setState(prevState => ({ stage: prevState.stage + 1 }));
   };
 
   render() {
+    console.log(this.state);
     const { stage } = this.state;
     return (
       <div style={viewportCenter}>
@@ -58,3 +63,4 @@ export default class Registration extends Component<
     );
   }
 }
+export default Registration;

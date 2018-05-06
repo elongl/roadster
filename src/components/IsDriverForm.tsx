@@ -25,7 +25,7 @@ const IsDriverForm: StatelessComponent<{
         Yes
       </Button>
       <Button.Or />
-      <Button secondary onClick={() => props.changeIsDriver(true)}>
+      <Button secondary onClick={() => props.changeIsDriver(false)}>
         <Icon name="remove" />
         No
       </Button>
