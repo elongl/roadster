@@ -10,7 +10,7 @@ export default class Registration extends Component<
   { stage: number; phoneNumber: string; isDriver: boolean | undefined }
 > {
   state = {
-    stage: this.props.user && this.props.user.phoneNumber ? 2 : 1,
+    stage: 1,
     phoneNumber: '',
     isDriver: undefined
   };
@@ -34,16 +34,25 @@ export default class Registration extends Component<
   };
 
   render() {
+    const { stage } = this.state;
     return (
       <div style={viewportCenter}>
-        {this.state.stage === 1 ? (
+        {stage === 1 && (
           <PhoneNumberForm
             phoneNumber={this.state.phoneNumber}
             changePhoneNumber={this.changePhoneNumber}
             pushStage={this.pushStage}
           />
-        ) : (
-          <IsDriverForm changeIsDriver={this.changeIsDriver} />
+        )}
+        {stage === 2 && <IsDriverForm changeIsDriver={this.changeIsDriver} />}
+        {stage === 3 && (
+          <h1>
+            Thank you for your joining the Roadster team!<span
+              style={{ display: 'block' }}
+            >
+              You will be redirected soon.
+            </span>
+          </h1>
         )}
       </div>
     );

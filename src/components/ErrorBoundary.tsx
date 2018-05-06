@@ -18,7 +18,9 @@ const ErrorBoundary: StatelessComponent<{
       >
         <Image src="/assets/images/cloud-error.svg" size="small" />
         <h2>Network Error Occured.</h2>
-        <h3 style={{ width: '60%' }}>We had some problem with your last request.</h3>
+        <h3 style={{ width: '60%', fontWeight: 100, fontStyle: 'italic' }}>
+          We had some problem with your last request.
+        </h3>
         <Button
           inverted
           negative

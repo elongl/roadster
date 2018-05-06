@@ -14,7 +14,7 @@ const SocialNetworkButton: StatelessComponent<Props> = props => (
     color={props.colorAndIcon}
     content={`Sign in with ${props.name}`}
     onClick={() => {
-      window.location.replace(process.env.REACT_APP_SERVER_URL + '/auth/' + props.name);
+      location.replace(process.env.REACT_APP_SERVER_URL + '/auth/' + props.name);
     }}
   />
 );
