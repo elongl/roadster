@@ -1,5 +1,5 @@
 import React, { StatelessComponent } from 'react';
-import AppState from '../typing/AppState';
+import AppState from '../types/AppState';
 import viewportCenter from '../styles/viewportCenter';
 import { connect } from 'react-redux';
 import { Image } from 'semantic-ui-react';

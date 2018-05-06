@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import UserDetails from '../typing/UserDetails';
+import UserDetails from '../types/UserDetails';
 
 const serializeUser = (user: UserDetails) => ({
   type: 'SERIALIZE_USER',

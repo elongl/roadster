@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PhoneNumberForm from './PhoneNumberForm';
 import IsDriverForm from './IsDriverForm';
 import viewportCenter from '../styles/viewportCenter';
-import AppState from '../typing/AppState';
+import AppState from '../types/AppState';
 // import updateUser from '../api/updateUser';
 
 export default class Registration extends Component<

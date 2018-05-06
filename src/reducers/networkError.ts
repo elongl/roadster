@@ -1,4 +1,4 @@
-import AppState from '../typing/AppState';
+import AppState from '../types/AppState';
 import { ErrorAction } from '../actions/networkError';
 
 const networkError = (state: AppState['networkError'] = null, action: ErrorAction) => {

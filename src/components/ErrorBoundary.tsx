@@ -1,6 +1,6 @@
 import React, { StatelessComponent } from 'react';
 import { connect } from 'react-redux';
-import AppState from '../typing/AppState';
+import AppState from '../types/AppState';
 import viewportCenter from '../styles/viewportCenter';
 import { Image, Button } from 'semantic-ui-react';
 
