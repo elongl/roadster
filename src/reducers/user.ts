@@ -1,4 +1,4 @@
-import AppState from '../types/AppState';
+import AppState from '../typings/AppState';
 import { UserAction } from '../actions/user';
 
 const user = (state: AppState['user'] = null, action: UserAction) => {

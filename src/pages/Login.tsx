@@ -1,7 +1,7 @@
 import React, { StatelessComponent } from 'react';
 import Registration from '../components/Registration';
 import { connect } from 'react-redux';
-import AppState from '../types/AppState';
+import AppState from '../typings/AppState';
 import Introduction from '../components/Introduction';
 
 const Login: StatelessComponent<{ user: AppState['user'] }> = ({ user }) => {
