@@ -1,7 +1,7 @@
 import React, { StatelessComponent } from 'react';
 import { connect } from 'react-redux';
 import AppState from '../typing/AppState';
-import flexCenter from '../styles/flexCenter';
+import viewportCenter from '../styles/viewportCenter';
 import { Image, Button } from 'semantic-ui-react';
 
 const ErrorBoundary: StatelessComponent<{
@@ -11,8 +11,7 @@ const ErrorBoundary: StatelessComponent<{
     return (
       <div
         style={{
-          ...flexCenter,
-          flexDirection: 'column',
+          ...viewportCenter,
           textAlign: 'center',
           color: 'white'
         }}

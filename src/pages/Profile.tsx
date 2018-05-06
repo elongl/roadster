@@ -1,13 +1,13 @@
 import React, { StatelessComponent } from 'react';
 import AppState from '../typing/AppState';
-import flexCenter from '../styles/flexCenter';
+import viewportCenter from '../styles/viewportCenter';
 import { connect } from 'react-redux';
 import { Image } from 'semantic-ui-react';
 
 const Profile: StatelessComponent<{
   user: AppState['user'];
 }> = props => (
-  <div style={{ ...flexCenter, color: 'white' }}>
+  <div style={{ ...viewportCenter, color: 'white' }}>
     {props.user ? (
       <>
         <Image

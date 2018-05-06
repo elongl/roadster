@@ -1,14 +1,14 @@
 import React, { StatelessComponent } from 'react';
-import PhoneAndDriver from '../components/PhoneAndDriver';
+import Registration from '../components/Registration';
 import { connect } from 'react-redux';
 import AppState from '../typing/AppState';
-import LoginForm from '../components/LoginForm';
+import Introduction from '../components/Introduction';
 
 const Login: StatelessComponent<{ user: AppState['user'] }> = ({ user }) => {
   if (user && (user.isDriver === null || user.phoneNumber === null)) {
-    return <PhoneAndDriver />;
+    return <Registration user={user} />;
   }
-  return <LoginForm />;
+  return <Introduction />;
 };
 
 const mapStateToProps = (state: AppState) => ({ user: state.user });

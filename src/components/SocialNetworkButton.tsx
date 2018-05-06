@@ -1,15 +1,12 @@
 import React, { StatelessComponent } from 'react';
 import { Button, ButtonProps } from 'semantic-ui-react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 interface Props {
   colorAndIcon: ButtonProps['color'] | ButtonProps['icon'];
   name: string;
 }
 
-const SocialNetworkButton: StatelessComponent<
-  Props & RouteComponentProps<{}>
-> = props => (
+const SocialNetworkButton: StatelessComponent<Props> = props => (
   <Button
     icon={props.colorAndIcon}
     style={{ marginBottom: '1rem', width: '19rem' }}
@@ -21,4 +18,4 @@ const SocialNetworkButton: StatelessComponent<
     }}
   />
 );
-export default withRouter(SocialNetworkButton);
+export default SocialNetworkButton;

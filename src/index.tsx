@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import './injectGlobal';
-import ErrorBoundary from './pages/ErrorBoundary';
+import ErrorBoundary from './components/ErrorBoundary';
 // import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
@@ -16,7 +16,7 @@ ReactDOM.render(
       </BrowserRouter>
     </ErrorBoundary>
   </Provider>,
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root')
 );
 
 // registerServiceWorker();

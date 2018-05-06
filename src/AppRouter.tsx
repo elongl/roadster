@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import appStart from './appStart';
 
-class AppRouter extends Component {
+export default class AppRouter extends Component {
   state = { loading: true };
 
   async componentDidMount() {
@@ -24,5 +24,3 @@ class AppRouter extends Component {
     );
   }
 }
-
-export default AppRouter;
