@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import appStart from './appStart';
-import LoggedUserRoute from './components/LoggedUserRoute';
+import AuthRoute from './components/AuthRoute';
 
 export default class AppRouter extends Component {
   state = { loading: true };
@@ -22,8 +22,8 @@ export default class AppRouter extends Component {
     return (
       <Switch>
         <Route exact path="/login" component={Login} />
-        <LoggedUserRoute exact path="/" component={Home} />
-        <LoggedUserRoute exact path="/profile" component={Profile} />
+        <AuthRoute exact path="/" component={Home} />
+        <AuthRoute exact path="/profile" component={Profile} />
       </Switch>
     );
   }

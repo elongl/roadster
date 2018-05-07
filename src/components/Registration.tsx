@@ -38,7 +38,6 @@ class Registration extends Component<
   };
 
   render() {
-    console.log(this.state);
     const { stage } = this.state;
     return (
       <div style={viewportCenter}>
@@ -51,13 +50,12 @@ class Registration extends Component<
         )}
         {stage === 2 && <IsDriverForm changeIsDriver={this.changeIsDriver} />}
         {stage === 3 && (
-          <h1>
-            Thank you for your joining the Roadster team!<span
-              style={{ display: 'block' }}
-            >
-              You will be redirected soon.
+          <h3 style={{ color: 'white', fontStyle: 'italic' }}>
+            Thank you for your joining the Roadster team!
+            <span style={{ display: 'block', textAlign: 'center' }}>
+              You will be redirected shortly.
             </span>
-          </h1>
+          </h3>
         )}
       </div>
     );

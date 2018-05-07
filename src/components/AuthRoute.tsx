@@ -3,19 +3,19 @@ import { connect } from 'react-redux';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 import AppState from '../typings/AppState';
 
-const LoggedUserRoute: StatelessComponent<
+const AuthRoute: StatelessComponent<
   RouteProps & {
     component: ComponentType;
     user: AppState['user'];
   }
-> = ({ user, component: LoggedUserComponent, ...routeProps }) => {
-  const userLoggedIn = user && user.isDriver && user.phoneNumber;
+> = ({ user, component: AuthComponent, ...routeProps }) => {
+  const isUserAuthenticated = user && user.isDriver !== null && user.phoneNumber !== null;
   return (
     <Route
       {...routeProps}
-      render={() => (userLoggedIn ? <LoggedUserComponent /> : <Redirect to="/login" />)}
+      render={() => (isUserAuthenticated ? <AuthComponent /> : <Redirect to="/login" />)}
     />
   );
 };
 const mapStateToProps = (state: AppState) => ({ user: state.user });
-export default connect(mapStateToProps)(LoggedUserRoute);
+export default connect(mapStateToProps)(AuthRoute);

@@ -3,7 +3,7 @@ import viewportCenter from '../styles/viewportCenter';
 
 const Home: StatelessComponent = () => (
   <div style={viewportCenter}>
-    <h1>This is the Homepage.</h1>
+    <h1 style={{ color: 'lightgreen' }}>Grove Street, Home.</h1>
   </div>
 );
 
