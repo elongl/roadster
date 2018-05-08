@@ -1,8 +1,20 @@
 import { injectGlobal } from 'react-emotion';
 injectGlobal(`
 html, body {
-    background: #DA4453;
-    background: -webkit-linear-gradient(to top, #89216B, #DA4453);
-    background: linear-gradient(to top, #89216B, #DA4453);
+    background: #D31027;
+    background: -webkit-linear-gradient(to right, #EA384D, #D31027);
+    background: linear-gradient(to right, #EA384D, #D31027);    
 }
+
+@media only screen and (min-width: 600px) {
+    html {
+        font-size: 35px;
+    }
+}
+@media only screen and (min-width: 1100px) {
+    html {
+        font-size: 45px;
+    }
+}
+
 `);
