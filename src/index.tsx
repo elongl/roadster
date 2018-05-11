@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import AppRouter from './AppRouter';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import registerServiceWorker from './registerServiceWorker';
+import ErrorBoundary from './components/ErrorBoundary';
 import store from './store';
 import './injectGlobal';
-import ErrorBoundary from './components/ErrorBoundary';
-// import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -19,7 +19,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// registerServiceWorker();
+registerServiceWorker();
 if (module.hot) {
   module.hot.accept();
 }

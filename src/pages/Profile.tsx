@@ -13,6 +13,7 @@ const Profile: StatelessComponent<{
       <Image
         circular
         size="small"
+        style={{ height: 150 }}
         src={props.user.avatar.substring(0, props.user.avatar.indexOf('?')) + '?sz=200'}
       />
       <h2>Display Name</h2>
