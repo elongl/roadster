@@ -1,36 +1,17 @@
 import React, { StatelessComponent } from 'react';
 import { connect } from 'react-redux';
 import AppState from '../typings/AppState';
-import viewportCenter from '../styles/viewportCenter';
-import { Image, Button } from 'semantic-ui-react';
+import Error from './Error';
 
 const ErrorBoundary: StatelessComponent<{
   networkError: AppState['networkError'];
 }> = props => {
   if (props.networkError) {
     return (
-      <div
-        style={{
-          ...viewportCenter,
-          textAlign: 'center',
-          color: 'white'
-        }}
-      >
-        <Image src="/assets/images/cloud-error.svg" size="small" />
-        <h2>Network Error Occured.</h2>
-        <h3 style={{ width: '60%', fontWeight: 100, fontStyle: 'italic' }}>
-          We had some problem with your last request.
-        </h3>
-        <Button
-          inverted
-          negative
-          circular
-          icon="repeat"
-          size="big"
-          content="Try Again"
-          onClick={() => location.reload()}
-        />
-      </div>
+      <Error
+        header="Network Error Occured."
+        content="We had some problem with your last request."
+      />
     );
   }
   return <>{props.children}</>;

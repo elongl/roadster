@@ -34,6 +34,16 @@ const routes = [
     content: 'Settings',
     icon: 'settings' as SemanticICONS,
     to: '/settings'
+  },
+  {
+    content: 'Help & Support',
+    icon: 'help circle outline' as SemanticICONS,
+    to: '/support'
+  },
+  {
+    content: 'Log Out',
+    icon: 'log out' as SemanticICONS,
+    to: '/logout'
   }
 ];
 
