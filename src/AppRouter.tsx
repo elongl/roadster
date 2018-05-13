@@ -5,8 +5,9 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import appStart from './appStart';
 import AuthRoute from './components/AuthRoute';
+import Ride from './pages/Ride';
 
-export default class AppRouter extends Component {
+class AppRouter extends Component {
   state = { loading: true };
 
   async componentDidMount() {
@@ -24,7 +25,9 @@ export default class AppRouter extends Component {
         <Route exact path="/login" component={Login} />
         <AuthRoute exact path="/" component={Home} />
         <AuthRoute exact path="/profile" component={Profile} />
+        <AuthRoute exact path="/ride" component={Ride} />
       </Switch>
     );
   }
 }
+export default AppRouter;

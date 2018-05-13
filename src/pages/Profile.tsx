@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { Image } from 'semantic-ui-react';
 import UserDetails from '../typings/UserDetails';
 import AppState from '../typings/AppState';
+import SidebarMenu from '../components/SidebarMenu';
 
 const Profile: StatelessComponent<{
   user: UserDetails;
 }> = props => (
   <div style={{ ...viewportCenter, color: 'white' }}>
     <>
+      <SidebarMenu />
       <Image
         circular
         size="small"
@@ -25,6 +27,5 @@ const Profile: StatelessComponent<{
     </>
   </div>
 );
-
 const mapStateToProps = (state: AppState) => ({ user: state.user });
 export default connect(mapStateToProps)(Profile);
