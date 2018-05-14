@@ -7,14 +7,32 @@ html, body {
 }
 
 @media only screen and (min-width: 600px) {
-    html {
+    html, body {
         font-size: 35px;
     }
 }
 @media only screen and (min-width: 1100px) {
-    html {
+    html, body {
         font-size: 45px;
     }
 }
 
+.fade {
+    &-enter,
+    &-exit {
+        transition: opacity 300ms linear;
+    }
+    &-enter {
+        opacity: 0;
+        &-active {
+            opacity: 1;
+        }
+    }
+    &-exit {
+        opacity: 1;
+        &-active {
+            opacity: 0;
+        }
+    }
+}
 `);
