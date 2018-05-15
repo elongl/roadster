@@ -10,6 +10,9 @@ const AuthRoute: StatelessComponent<
   }
 > = ({ user, component: AuthComponent, ...routeProps }) => {
   const isUserAuthenticated = user && user.isDriver !== null && user.phoneNumber !== null;
+  if (location.pathname === '/login') {
+    return null;
+  }
   return (
     <Route
       {...routeProps}

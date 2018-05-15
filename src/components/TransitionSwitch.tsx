@@ -6,9 +6,7 @@ const TransitionSwitch: StatelessComponent = ({ children }) => (
     render={({ location }) => (
       <TransitionGroup>
         <CSSTransition key={location.key} classNames="fade" timeout={300}>
-          <Switch location={location}>
-            <>{children}</>
-          </Switch>
+          <Switch location={location}>{children}</Switch>
         </CSSTransition>
       </TransitionGroup>
     )}
