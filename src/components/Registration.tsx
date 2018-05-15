@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import PhoneNumberForm from './PhoneNumberForm';
 import IsDriverForm from './IsDriverForm';
 import viewportCenter from '../styles/viewportCenter';
-import AppState from '../typings/AppState';
 import updateUser from '../api/updateUser';
 
 class Registration extends Component<
-  { user: AppState['user'] },
+  {},
   { stage: number; phoneNumber: string; isDriver: boolean | undefined }
 > {
   state = {
@@ -26,11 +25,8 @@ class Registration extends Component<
   updateUser = () => {
     const phoneNumber = this.state.phoneNumber.replace('-', '');
     const { isDriver } = this.state;
-    const { user } = this.props;
-    if (user) {
-      updateUser(user.id, { phoneNumber, isDriver }).then(() => this.pushStage());
-      setTimeout(() => location.reload(), 2500);
-    }
+    updateUser({ phoneNumber, isDriver }).then(() => this.pushStage());
+    setTimeout(() => location.reload(), 2500);
   };
 
   pushStage = () => {

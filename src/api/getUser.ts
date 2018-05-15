@@ -1,6 +1,6 @@
 import request from './request';
 const getUser = () =>
-  request.get('/auth/user', { withCredentials: true }).then(
+  request.get('/auth/user').then(
     ({ data: user }) => user,
     error => {
       if (!error.response) {

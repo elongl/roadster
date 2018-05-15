@@ -1,8 +1,5 @@
 import request from './request';
 import UserDetails from '../typings/UserDetails';
-const updateUser = (userId: number, changedProperties: Partial<UserDetails>) =>
-  request.patch('/user', {
-    id: userId,
-    changedProperties
-  });
+const updateUser = (changedProperties: Partial<UserDetails>) =>
+  request.patch('/user', changedProperties);
 export default updateUser;
