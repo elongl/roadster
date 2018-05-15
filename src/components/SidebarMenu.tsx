@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { SemanticICONS, Sidebar, Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-const RedirectButton = ({ content, icon, to, onClick }: RedirectButton) => (
-  <Menu.Item as={Link} to={to} onClick={onClick}>
+const RedirectButton = ({ content, icon, to }: RedirectButton) => (
+  <Menu.Item as={Link} to={to}>
     <Icon name={icon} />
     {content}
   </Menu.Item>
@@ -82,7 +82,6 @@ class SidebarMenu extends Component {
               icon={route.icon}
               key={route.to}
               to={route.to}
-              onClick={this.toggleVisibility}
             />
           ))}
         </Sidebar>
@@ -95,5 +94,4 @@ interface RedirectButton {
   content: string;
   icon: SemanticICONS;
   to: string;
-  onClick: () => void;
 }

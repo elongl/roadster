@@ -7,7 +7,7 @@ import { Redirect } from 'react-router';
 
 const Login: StatelessComponent<{ user: AppState['user'] }> = ({ user }) => {
   if (user && (user.isDriver === null || user.phoneNumber === null)) {
-    return <Registration user={user} />;
+    return <Registration />;
   }
   if (user) {
     return <Redirect to="/" />;
