@@ -4,10 +4,11 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import appStart from './appStart';
-import AuthRoute from './components/AuthRoute';
+import AuthRoute from './components/routing/AuthRoute';
 import Ride from './pages/Ride';
-import UnfoundRoute from './components/UnfoundRoute';
-import TransitionSwitch from './components/TransitionSwitch';
+import Drive from './pages/Drive';
+import UnfoundRoute from './components/routing/UnfoundRoute';
+import TransitionSwitch from './components/routing/TransitionSwitch';
 
 class AppRouter extends Component {
   state = { loading: true };
@@ -27,6 +28,7 @@ class AppRouter extends Component {
         <Route exact path="/login" component={Login} />
         <AuthRoute exact path="/" component={Home} />
         <AuthRoute exact path="/profile" component={Profile} />
+        <AuthRoute exact path="/drive" component={Drive} />
         <AuthRoute exact path="/ride" component={Ride} />
         <Route component={UnfoundRoute} />
       </TransitionSwitch>

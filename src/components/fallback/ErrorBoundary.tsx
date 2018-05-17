@@ -1,6 +1,6 @@
 import React, { StatelessComponent } from 'react';
 import { connect } from 'react-redux';
-import AppState from '../typings/AppState';
+import AppState from '../../typings/AppState';
 import Error from './Error';
 
 const ErrorBoundary: StatelessComponent<{

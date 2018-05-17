@@ -4,7 +4,7 @@ import AppRouter from './AppRouter';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
-import ErrorBoundary from './components/ErrorBoundary';
+import ErrorBoundary from './components/fallback/ErrorBoundary';
 import store from './store';
 import './injectGlobal';
 

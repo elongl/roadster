@@ -1,6 +1,6 @@
 import React, { StatelessComponent } from 'react';
 import { Input, Flag, Label, Button, Form } from 'semantic-ui-react';
-import viewportCenter from '../styles/viewportCenter';
+import viewportCenter from '../../styles/viewportCenter';
 
 const PhoneNumberForm: StatelessComponent<{
   phoneNumber: string;

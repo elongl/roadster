@@ -1,5 +1,5 @@
 import React from 'react';
-import SidebarMenu from '../components/SidebarMenu';
+import SidebarMenu from '../components/common/SidebarMenu';
 import viewportCenter from '../styles/viewportCenter';
 const Ride = () => (
   <div style={{ color: 'white' }}>

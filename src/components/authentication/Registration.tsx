@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PhoneNumberForm from './PhoneNumberForm';
 import IsDriverForm from './IsDriverForm';
-import viewportCenter from '../styles/viewportCenter';
-import updateUser from '../api/updateUser';
+import viewportCenter from '../../styles/viewportCenter';
+import updateUser from '../../api/updateUser';
 
 class Registration extends Component<
   {},

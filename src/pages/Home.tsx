@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 import AppState from '../typings/AppState';
 import { connect } from 'react-redux';
 import UserDetails from '../typings/UserDetails';
-import SidebarMenu from '../components/SidebarMenu';
+import SidebarMenu from '../components/common/SidebarMenu';
 
 const LinkButton: StatelessComponent<LinkButton> = props => (
   <Button
     inverted
     size="huge"
-    style={{ width: '65%' }}
+    style={{ width: '65%', fontStyle: 'italic' }}
     as={Link}
     to={props.to}
     disabled={props.disabled}

@@ -55,7 +55,7 @@ class SidebarMenu extends Component {
     const { visible } = this.state;
 
     return (
-      <div style={{ position: 'fixed', top: '1rem', left: '1rem', zIndex: 1 }}>
+      <div style={{ position: 'fixed', top: '0.75rem', left: '0.75rem', zIndex: 1 }}>
         <Icon
           link
           circular

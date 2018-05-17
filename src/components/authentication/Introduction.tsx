@@ -1,7 +1,7 @@
-import SocialNetworkButton from './SocialNetworkButton';
-import EntryTransition from './EntryTransition';
+import SocialNetworkButton from '../common/SocialNetworkButton';
+import EntryTransition from '../common/EntryTransition';
 import React from 'react';
-import center from '../styles/center';
+import center from '../../styles/center';
 const Introduction = () => (
   <div style={center}>
     <h1

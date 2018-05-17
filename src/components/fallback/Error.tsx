@@ -1,5 +1,5 @@
 import React, { StatelessComponent } from 'react';
-import viewportCenter from '../styles/viewportCenter';
+import viewportCenter from '../../styles/viewportCenter';
 import { Image, Button } from 'semantic-ui-react';
 
 interface ErrorProps {

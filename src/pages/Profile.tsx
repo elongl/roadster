@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Image } from 'semantic-ui-react';
 import UserDetails from '../typings/UserDetails';
 import AppState from '../typings/AppState';
-import SidebarMenu from '../components/SidebarMenu';
+import SidebarMenu from '../components/common/SidebarMenu';
 
 const Profile: StatelessComponent<{
   user: UserDetails;

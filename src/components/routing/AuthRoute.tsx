@@ -1,7 +1,7 @@
 import React, { ComponentType, StatelessComponent } from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
-import AppState from '../typings/AppState';
+import AppState from '../../typings/AppState';
 
 const AuthRoute: StatelessComponent<
   RouteProps & {
