@@ -6,7 +6,7 @@ const SidebarTitle: StatelessComponent<{ title: string }> = ({ title }) => (
     style={{
       color: 'white',
       paddingBottom: '1.5rem',
-      backgroundColor: '#00000015',
+      backgroundColor: '#00000010',
       ...center
     }}
   >
