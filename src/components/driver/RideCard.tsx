@@ -10,7 +10,7 @@ const RideCard: StatelessComponent<RideCard> = props => (
       <Card.Description>
         <strong>From:</strong> Shoham, Lakish, 123.
         <br />
-        <strong>To:</strong> Tel Aviv, Reines, 23
+        <strong>To:</strong> Tel Aviv, Reines, 23.
       </Card.Description>
     </Card.Content>
   </Card>
