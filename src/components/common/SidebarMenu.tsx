@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { SemanticICONS, Sidebar, Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-const RedirectButton = ({ content, icon, to }: RedirectButton) => (
+const LinkButton = ({ content, icon, to }: LinkButton) => (
   <Menu.Item as={Link} to={to}>
     <Icon name={icon} />
     {content}
@@ -77,7 +77,7 @@ class SidebarMenu extends Component {
             Cancel
           </Menu.Item>
           {routes.map(route => (
-            <RedirectButton
+            <LinkButton
               content={route.content}
               icon={route.icon}
               key={route.to}
@@ -90,7 +90,7 @@ class SidebarMenu extends Component {
   }
 }
 export default SidebarMenu;
-interface RedirectButton {
+interface LinkButton {
   content: string;
   icon: SemanticICONS;
   to: string;

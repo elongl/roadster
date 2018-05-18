@@ -20,7 +20,7 @@ html, body {
 .fade {
     &-enter,
     &-exit {
-        transition: opacity 200ms linear;
+        transition: opacity 300ms linear;
     }
     &-enter {
         opacity: 0;
