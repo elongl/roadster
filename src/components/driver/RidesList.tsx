@@ -7,8 +7,8 @@ import RideDetails from '../../typings/RideDetails';
 import UserDetails from '../../typings/UserDetails';
 import Loader from '../common/Loader';
 
-class RidesList extends Component<{}, { rides: DetailedRide[] | undefined }> {
-  state: { rides: undefined | DetailedRide[] } = { rides: undefined };
+class RidesList extends Component<{}, { rides: DetailedRide[]; ridesLoaded: boolean }> {
+  state = { rides: [], ridesLoaded: false };
 
   getDetailedRides = async () => {
     const { data: waitingRides } = await getWaitingRides();
@@ -19,23 +19,29 @@ class RidesList extends Component<{}, { rides: DetailedRide[] | undefined }> {
   };
 
   componentDidMount() {
-    this.getDetailedRides().then(rides => this.setState({ rides }));
+    this.getDetailedRides().then(rides => this.setState({ rides, ridesLoaded: true }));
   }
 
   render() {
-    const { rides } = this.state;
+    const { rides, ridesLoaded } = this.state;
     return (
       <div style={{ ...center, marginTop: '1rem' }}>
-        {rides ? (
-          rides.map((ride: DetailedRide) => (
-            <RideCard
-              key={ride.id}
-              riderName={ride.user.displayName}
-              riderAvatar={ride.user.avatar}
-              startPoint={ride.startPoint}
-              endPoint={ride.endPoint}
-            />
-          ))
+        {ridesLoaded ? (
+          rides.length !== 0 ? (
+            rides.map((ride: DetailedRide) => (
+              <RideCard
+                key={ride.id}
+                riderName={ride.user.displayName}
+                riderAvatar={ride.user.avatar}
+                startPoint={ride.startPoint}
+                endPoint={ride.endPoint}
+              />
+            ))
+          ) : (
+            <h1 style={{ marginTop: '3rem', color: 'white', fontStyle: 'italic' }}>
+              No rides needed!
+            </h1>
+          )
         ) : (
           <Loader />
         )}

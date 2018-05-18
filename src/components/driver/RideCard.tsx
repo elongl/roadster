@@ -4,7 +4,12 @@ import Location from '../../typings/Location';
 const RideCard: StatelessComponent<RideCard> = props => (
   <Card link style={{ width: '85%', margin: '0.5rem' }}>
     <Card.Content>
-      <Image floated="right" size="mini" src={props.riderAvatar} style={{ margin: 0 }} />
+      <Image
+        floated="right"
+        size="mini"
+        src={props.riderAvatar.substring(0, props.riderAvatar.indexOf('?')) + '?sz=200'}
+        style={{ margin: 0, width: '3.5rem', height: '3.5rem' }}
+      />
       <Card.Header>{props.riderName}</Card.Header>
       <Card.Meta>King of the Road.</Card.Meta>
       <Card.Description>
