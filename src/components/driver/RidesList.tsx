@@ -1,56 +1,54 @@
 import React, { Component } from 'react';
-import RideCard from './RideCard';
 import center from '../../styles/center';
 import getWaitingRides from '../../api/getWaitingRides';
 import getUser from '../../api/getUser';
+import { TransitionGroup } from 'semantic-ui-react';
+import RideCard from './RideCard';
+import RideWithUser from '../../typings/RideWithUser';
 import RideDetails from '../../typings/RideDetails';
-import UserDetails from '../../typings/UserDetails';
-import Loader from '../common/Loader';
 
-class RidesList extends Component<{}, { rides: DetailedRide[]; ridesLoaded: boolean }> {
-  state = { rides: [], ridesLoaded: false };
+class RidesList extends Component {
+  state: { rides: RideWithUser[]; ridesLoaded: boolean } = {
+    rides: [],
+    ridesLoaded: false
+  };
 
   getDetailedRides = async () => {
     const { data: waitingRides } = await getWaitingRides();
     return Promise.all(waitingRides.map(async (ride: RideDetails) => ({
       ...ride,
       user: (await getUser(ride.riderId)).data
-    })) as DetailedRide[]);
+    })) as RideWithUser[]);
   };
 
   componentDidMount() {
     this.getDetailedRides().then(rides => this.setState({ rides, ridesLoaded: true }));
   }
+  selectRide = (rideId: number) => {
+    // Do something with ride.
+  };
 
   render() {
     const { rides, ridesLoaded } = this.state;
     return (
-      <div style={{ ...center, marginTop: '1rem' }}>
+      <TransitionGroup
+        animation="horizontal flip"
+        style={{ ...center, width: '100%', marginTop: '1rem' }}
+      >
         {ridesLoaded ? (
           rides.length !== 0 ? (
-            rides.map((ride: DetailedRide) => (
-              <RideCard
-                key={ride.id}
-                riderName={ride.user.displayName}
-                riderAvatar={ride.user.avatar}
-                startPoint={ride.startPoint}
-                endPoint={ride.endPoint}
-              />
+            rides.map((ride: RideWithUser) => (
+              <RideCard key={ride.id} ride={ride} onClick={this.selectRide} />
             ))
           ) : (
             <h1 style={{ marginTop: '3rem', color: 'white', fontStyle: 'italic' }}>
               No rides needed!
             </h1>
           )
-        ) : (
-          <Loader />
-        )}
-      </div>
+        ) : null}
+      </TransitionGroup>
     );
   }
 }
 
-interface DetailedRide extends RideDetails {
-  user: UserDetails;
-}
 export default RidesList;

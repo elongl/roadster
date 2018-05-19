@@ -1,16 +1,22 @@
 import React, { StatelessComponent } from 'react';
 import { Card, Image } from 'semantic-ui-react';
-import Location from '../../typings/Location';
-const RideCard: StatelessComponent<RideCard> = props => (
-  <Card link style={{ width: '85%', margin: '0.5rem' }}>
+import RideWithUser from '../../typings/RideWithUser';
+const RideCard: StatelessComponent<RideCard> = ({ ride, onClick, className }) => (
+  <Card
+    link
+    raised
+    className={className}
+    style={{ width: '85%', margin: '0.5rem' }}
+    onClick={() => onClick(ride.id)}
+  >
     <Card.Content>
       <Image
         floated="right"
         size="mini"
-        src={props.riderAvatar.substring(0, props.riderAvatar.indexOf('?')) + '?sz=200'}
+        src={ride.user.avatar.substring(0, ride.user.avatar.indexOf('?')) + '?sz=200'}
         style={{ margin: 0, width: '3.5rem', height: '3.5rem' }}
       />
-      <Card.Header>{props.riderName}</Card.Header>
+      <Card.Header>{ride.user.displayName}</Card.Header>
       <Card.Meta>King of the Road.</Card.Meta>
       <Card.Description>
         <strong>From:</strong> Shoham, Lakish, 123.
@@ -21,9 +27,8 @@ const RideCard: StatelessComponent<RideCard> = props => (
   </Card>
 );
 interface RideCard {
-  riderName: string;
-  startPoint: Location;
-  endPoint: Location;
-  riderAvatar: string;
+  className?: string;
+  ride: RideWithUser;
+  onClick: (id: number) => void;
 }
 export default RideCard;
