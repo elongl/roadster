@@ -3,7 +3,7 @@ export default interface RideDetails {
   id: number;
   riderId: number;
   driverId: number;
-  startPoint: Location;
-  endPoint: Location;
+  origin: Location;
+  destination: Location;
   status: string;
 }

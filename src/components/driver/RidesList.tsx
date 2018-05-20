@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import center from '../../styles/center';
 import getWaitingRides from '../../api/getWaitingRides';
 import getUser from '../../api/getUser';
-import { TransitionGroup } from 'semantic-ui-react';
+import { TransitionGroup, Loader } from 'semantic-ui-react';
 import RideCard from './RideCard';
 import RideWithUser from '../../typings/RideWithUser';
 import RideDetails from '../../typings/RideDetails';
@@ -45,7 +45,9 @@ class RidesList extends Component {
               No rides needed!
             </h1>
           )
-        ) : null}
+        ) : (
+          <Loader />
+        )}
       </TransitionGroup>
     );
   }

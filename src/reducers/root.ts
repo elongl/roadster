@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux';
-import networkError from './networkError';
+import fallbackError from './fallbackError';
 import user from './user';
-export default combineReducers({ user, networkError });
+export default combineReducers({ user, fallbackError });

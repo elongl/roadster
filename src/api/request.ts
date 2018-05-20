@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store';
-import { networkError } from '../actions/networkError';
+import { networkError } from '../actions/fallbackError';
 const request = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
   withCredentials: true
