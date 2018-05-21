@@ -4,37 +4,41 @@ import getWaitingRides from '../../api/getWaitingRides';
 import getUser from '../../api/getUser';
 import { TransitionGroup, Loader } from 'semantic-ui-react';
 import RideCard from './RideCard';
-import RideWithUser from '../../typings/RideWithUser';
+import UserRide from '../../typings/UserRide';
 import RideDetails from '../../typings/RideDetails';
 
 class RidesList extends Component {
-  state: { rides: RideWithUser[]; ridesLoaded: boolean } = {
-    rides: [],
+  state: { userRides: UserRide[]; ridesLoaded: boolean } = {
+    userRides: [],
     ridesLoaded: false
   };
 
-  getDetailedRides = async () => {
+  getUserRides = async () => {
     const { data: waitingRides } = await getWaitingRides();
     return Promise.all(waitingRides.map(async (ride: RideDetails) => ({
-      ...ride,
+      ride,
       user: (await getUser(ride.riderId)).data
-    })) as RideWithUser[]);
+    })) as UserRide[]);
   };
 
   componentDidMount() {
-    this.getDetailedRides().then(rides => this.setState({ rides, ridesLoaded: true }));
+    this.getUserRides().then(userRides =>
+      this.setState({ userRides, ridesLoaded: true })
+    );
   }
 
   render() {
-    const { rides, ridesLoaded } = this.state;
+    const { userRides, ridesLoaded } = this.state;
     return (
       <TransitionGroup
         animation="horizontal flip"
         style={{ ...center, width: '100%', marginTop: '1rem' }}
       >
         {ridesLoaded ? (
-          rides.length !== 0 ? (
-            rides.map((ride: RideWithUser) => <RideCard key={ride.id} ride={ride} />)
+          userRides.length !== 0 ? (
+            userRides.map((userRide: UserRide) => (
+              <RideCard key={userRide.ride.id} userRide={userRide} />
+            ))
           ) : (
             <h1 style={{ marginTop: '3rem', color: 'white', fontStyle: 'italic' }}>
               No rides needed!

@@ -1,7 +1,8 @@
 import RideDetails from './RideDetails';
 import UserDetails from './UserDetails';
 
-interface RideWithUser extends RideDetails {
+interface UserRide {
   user: UserDetails;
+  ride: RideDetails;
 }
-export default RideWithUser;
+export default UserRide;

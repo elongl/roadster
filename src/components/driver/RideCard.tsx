@@ -1,35 +1,38 @@
 import React, { StatelessComponent } from 'react';
 import { Card, Image } from 'semantic-ui-react';
-import RideWithUser from '../../typings/RideWithUser';
+import UserRide from '../../typings/UserRide';
 import { Link } from 'react-router-dom';
-const RideCard: StatelessComponent<RideCard> = ({ ride, className }) => (
+const RideCard: StatelessComponent<RideCard> = ({ userRide, className }) => (
   <Card
     link
     raised
     className={className}
     style={{ width: '85%', margin: '0.5rem' }}
     as={Link}
-    to={`/drive/${ride.id}`}
+    to={`/drive/${userRide.ride.id}`}
   >
     <Card.Content>
       <Image
         floated="right"
         size="mini"
-        src={ride.user.avatar.substring(0, ride.user.avatar.indexOf('?')) + '?sz=200'}
+        src={
+          userRide.user.avatar.substring(0, userRide.user.avatar.indexOf('?')) + '?sz=200'
+        }
         style={{ margin: 0, width: '3.5rem', height: '3.5rem' }}
       />
-      <Card.Header>{ride.user.displayName}</Card.Header>
+      <Card.Header>{userRide.user.displayName}</Card.Header>
       <Card.Meta>King of the Road.</Card.Meta>
       <Card.Description>
-        <strong>From:</strong> {ride.origin}
+        <strong>From:</strong> {userRide.ride.origin}
         <br />
-        <strong>To:</strong> {ride.destination}
+        <strong>To:</strong> {userRide.ride.destination}
       </Card.Description>
     </Card.Content>
   </Card>
 );
+
 interface RideCard {
   className?: string;
-  ride: RideWithUser;
+  userRide: UserRide;
 }
 export default RideCard;
