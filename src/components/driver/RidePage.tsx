@@ -7,13 +7,19 @@ import { Segment, Button, Loader, Dimmer } from 'semantic-ui-react';
 import center from '../../styles/center';
 import DirectionsMap from '../maps/DirectionsMap';
 import { clientError } from '../../actions/fallbackError';
-import store from '../../store';
+import { connect } from 'react-redux';
+import { Action } from 'redux';
+import AppState from '../../typings/AppState';
+import { setUserLocation } from '../../actions/userLocation';
 
-class RidePage extends Component<RouteComponentProps<{ rideId: number }>> {
-  state: {
-    userLocation: { lat: number; lng: number } | undefined;
-    userRide: UserRide | undefined;
-  } = { userRide: undefined, userLocation: undefined };
+class RidePage extends Component<
+  {
+    onClientError: (error: Error) => void;
+    setUserLocation: (coordinates: Coordinates) => void;
+    userLocation: Coordinates | null;
+  } & RouteComponentProps<{ rideId: number }>
+> {
+  state: { userRide: UserRide | undefined } = { userRide: undefined };
 
   async componentDidMount() {
     const { rideId } = this.props.match.params;
@@ -24,12 +30,15 @@ class RidePage extends Component<RouteComponentProps<{ rideId: number }>> {
     } catch (err) {
       this.props.history.push('/drive');
     }
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(({ coords }) =>
-        this.setState({ userLocation: { lat: coords.latitude, lng: coords.longitude } })
-      );
-    } else {
-      store.dispatch(clientError(new Error('We were unable to track your location.')));
+
+    try {
+      if (!this.props.userLocation) {
+        navigator.geolocation.getCurrentPosition(({ coords }) =>
+          this.props.setUserLocation(coords)
+        );
+      }
+    } catch (err) {
+      this.props.onClientError(new Error('We were unable to track your location.'));
     }
   }
 
@@ -37,7 +46,7 @@ class RidePage extends Component<RouteComponentProps<{ rideId: number }>> {
     if (!this.state.userRide) {
       return <Loader />;
     }
-    const { userLocation } = this.state;
+    const { userLocation } = this.props;
     const { user, ride } = this.state.userRide;
 
     return (
@@ -67,7 +76,9 @@ class RidePage extends Component<RouteComponentProps<{ rideId: number }>> {
               <DirectionsMap
                 containerElement={<div style={{ height: '60vh', width: '90%' }} />}
                 mapElement={<div style={{ height: '100%', borderRadius: '1rem' }} />}
-                origin={new google.maps.LatLng(userLocation.lat, userLocation.lng)}
+                origin={
+                  new google.maps.LatLng(userLocation.latitude, userLocation.longitude)
+                }
                 pickup={ride.origin}
                 destination={ride.destination}
               />
@@ -85,7 +96,7 @@ class RidePage extends Component<RouteComponentProps<{ rideId: number }>> {
           ) : (
             <Dimmer active>
               <Loader size="big" indeterminate>
-                Tracking Your Location...
+                Tracking Your Location.
               </Loader>
             </Dimmer>
           )}
@@ -94,4 +105,10 @@ class RidePage extends Component<RouteComponentProps<{ rideId: number }>> {
     );
   }
 }
-export default RidePage;
+
+const mapStateToProps = (state: AppState) => ({ userLocation: state.userLocation });
+const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
+  onClientError: (error: Error) => dispatch(clientError(error)),
+  setUserLocation: (coordinates: Coordinates) => dispatch(setUserLocation(coordinates))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(RidePage);

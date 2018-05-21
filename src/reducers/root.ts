@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
 import fallbackError from './fallbackError';
 import user from './user';
-export default combineReducers({ user, fallbackError });
+import userLocation from './userLocation';
+export default combineReducers({ user, fallbackError, userLocation });
