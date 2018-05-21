@@ -1,8 +1,8 @@
+import React, { StatelessComponent } from 'react';
 import SocialNetworkButton from '../common/SocialNetworkButton';
 import EntryTransition from '../common/EntryTransition';
-import React from 'react';
 import center from '../../styles/center';
-const Introduction = () => (
+const Introduction: StatelessComponent = () => (
   <div style={center}>
     <h1
       style={{

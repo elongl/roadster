@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { StatelessComponent } from 'react';
 import SidebarTitle from '../common/SidebarTitle';
 import RidesList from './RidesList';
 
-const RidesLookup = () => (
+const RidesLookup: StatelessComponent = () => (
   <>
     <SidebarTitle title="Pick someone up." />
     <RidesList />

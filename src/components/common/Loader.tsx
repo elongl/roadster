@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { StatelessComponent } from 'react';
 import { Dimmer, Loader as Loading } from 'semantic-ui-react';
-const Loader = () => (
+const Loader: StatelessComponent = () => (
   <Dimmer active inverted>
     <Loading inverted>Loading</Loading>
   </Dimmer>

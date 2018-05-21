@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { StatelessComponent } from 'react';
 import center from '../../styles/center';
 import { Form, Button } from 'semantic-ui-react';
 
 // Use react-google-maps search box.
-const RideForm = () => (
+const RideForm: StatelessComponent = () => (
   <Form style={{ ...center, marginTop: '1rem' }}>
     <Form.Field>
       <label style={{ color: 'white' }}>Where would you like to go?</label>
