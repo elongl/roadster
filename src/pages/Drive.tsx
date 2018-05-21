@@ -1,12 +1,13 @@
 import React, { StatelessComponent } from 'react';
-import SidebarTitle from '../components/common/SidebarTitle';
-import RidesList from '../components/driver/RidesList';
+import RidesLookup from '../components/driver/RidesLookup';
+import RidePage from '../components/driver/RidePage';
+import { Switch, Route } from 'react-router-dom';
 
 const Drive: StatelessComponent = () => (
-  <div>
-    <SidebarTitle title="Pick someone up." />
-    <RidesList />
-  </div>
+  <Switch>
+    <Route exact path="/drive" component={RidesLookup} />
+    <Route exact path="/drive/:rideId" component={RidePage} />
+  </Switch>
 );
 
 export default Drive;

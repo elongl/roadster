@@ -28,7 +28,7 @@ class AppRouter extends Component {
         <Route exact path="/login" component={Login} />
         <AuthRoute exact path="/" component={Home} />
         <AuthRoute exact path="/profile" component={Profile} />
-        <AuthRoute exact path="/drive" component={Drive} />
+        <AuthRoute path="/drive" component={Drive} />
         <AuthRoute exact path="/ride" component={Ride} />
         <Route component={UnfoundRoute} />
       </TransitionSwitch>

@@ -24,9 +24,6 @@ class RidesList extends Component {
   componentDidMount() {
     this.getDetailedRides().then(rides => this.setState({ rides, ridesLoaded: true }));
   }
-  selectRide = (rideId: number) => {
-    // Do something with ride.
-  };
 
   render() {
     const { rides, ridesLoaded } = this.state;
@@ -37,9 +34,7 @@ class RidesList extends Component {
       >
         {ridesLoaded ? (
           rides.length !== 0 ? (
-            rides.map((ride: RideWithUser) => (
-              <RideCard key={ride.id} ride={ride} onClick={this.selectRide} />
-            ))
+            rides.map((ride: RideWithUser) => <RideCard key={ride.id} ride={ride} />)
           ) : (
             <h1 style={{ marginTop: '3rem', color: 'white', fontStyle: 'italic' }}>
               No rides needed!
