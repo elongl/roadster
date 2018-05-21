@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Action } from 'redux';
 import Error from './Error';
 import AppState from '../../typings/AppState';
 import { clientError } from '../../actions/fallbackError';
 
 class ErrorBoundary extends Component<{
   fallbackError: AppState['fallbackError'];
-  onClientError: (error: Error) => void;
+  clientError: typeof clientError;
 }> {
   componentDidCatch(error: Error) {
-    this.props.onClientError(error);
+    this.props.clientError(error);
   }
   render() {
     const { fallbackError, children } = this.props;
@@ -38,10 +37,6 @@ class ErrorBoundary extends Component<{
     }
   }
 }
-const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
-  onClientError: (error: Error) => {
-    dispatch(clientError(error));
-  }
-});
+
 const mapStateToProps = (state: AppState) => ({ fallbackError: state.fallbackError });
-export default connect(mapStateToProps, mapDispatchToProps)(ErrorBoundary);
+export default connect(mapStateToProps, { clientError })(ErrorBoundary);

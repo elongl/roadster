@@ -5,14 +5,15 @@ import {
   DirectionsRenderer,
   InfoWindow
 } from 'react-google-maps';
-import store from '../../store';
 import { clientError } from '../../actions/fallbackError';
 import { Icon } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 class DirectionsMap extends Component<{
   origin: string | google.maps.LatLng;
   pickup: string;
   destination: string;
+  clientError: typeof clientError;
 }> {
   state: { directions: google.maps.DirectionsResult | undefined } = {
     directions: undefined
@@ -32,7 +33,7 @@ class DirectionsMap extends Component<{
         if (status === google.maps.DirectionsStatus.OK) {
           this.setState({ directions: result });
         } else {
-          store.dispatch(clientError(new Error('Failed to load map.')));
+          this.props.clientError(new Error('Failed to load map.'));
         }
       }
     );
@@ -74,4 +75,4 @@ class DirectionsMap extends Component<{
   }
 }
 
-export default withGoogleMap(DirectionsMap);
+export default connect(undefined, { clientError })(withGoogleMap(DirectionsMap));

@@ -8,14 +8,13 @@ import center from '../../styles/center';
 import DirectionsMap from '../maps/DirectionsMap';
 import { clientError } from '../../actions/fallbackError';
 import { connect } from 'react-redux';
-import { Action } from 'redux';
 import AppState from '../../typings/AppState';
 import { setUserLocation } from '../../actions/userLocation';
 
 class RidePage extends Component<
   {
-    onClientError: (error: Error) => void;
-    setUserLocation: (coordinates: Coordinates) => void;
+    clientError: typeof clientError;
+    setUserLocation: typeof setUserLocation;
     userLocation: Coordinates | null;
   } & RouteComponentProps<{ rideId: number }>
 > {
@@ -38,7 +37,7 @@ class RidePage extends Component<
         );
       }
     } catch (err) {
-      this.props.onClientError(new Error('We were unable to track your location.'));
+      this.props.clientError(new Error('We were unable to track your location.'));
     }
   }
 
@@ -88,7 +87,11 @@ class RidePage extends Component<
                   Let's Roll!
                 </Button>
                 <Button.Or style={{ textTransform: 'uppercase' }} />
-                <Button style={{ width: '50%' }} secondary>
+                <Button
+                  secondary
+                  style={{ width: '50%' }}
+                  onClick={() => this.props.history.push('/drive')}
+                >
                   Skip
                 </Button>
               </Button.Group>
@@ -107,8 +110,4 @@ class RidePage extends Component<
 }
 
 const mapStateToProps = (state: AppState) => ({ userLocation: state.userLocation });
-const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
-  onClientError: (error: Error) => dispatch(clientError(error)),
-  setUserLocation: (coordinates: Coordinates) => dispatch(setUserLocation(coordinates))
-});
-export default connect(mapStateToProps, mapDispatchToProps)(RidePage);
+export default connect(mapStateToProps, { clientError, setUserLocation })(RidePage);
