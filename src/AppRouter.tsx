@@ -9,7 +9,6 @@ import Ride from './pages/Ride';
 import Drive from './pages/Drive';
 import UnfoundRoute from './components/routing/UnfoundRoute';
 import TransitionSwitch from './components/routing/TransitionSwitch';
-import Testing from './components/Testing';
 
 class AppRouter extends Component {
   state = { loading: true };
@@ -26,16 +25,6 @@ class AppRouter extends Component {
 
     return (
       <TransitionSwitch>
-        <Route
-          exact
-          path="/test"
-          component={() => (
-            <Testing
-              containerElement={<div style={{ height: `100vh` }} />}
-              mapElement={<div style={{ height: `100%` }} />}
-            />
-          )}
-        />
         <Route exact path="/login" component={Login} />
         <AuthRoute exact path="/" component={Home} />
         <AuthRoute exact path="/profile" component={Profile} />

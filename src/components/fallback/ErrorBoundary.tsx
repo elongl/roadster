@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AppState from '../../typings/AppState';
+import { Action } from 'redux';
 import Error from './Error';
-import store from '../../store';
+import AppState from '../../typings/AppState';
 import { clientError } from '../../actions/fallbackError';
 
-class ErrorBoundary extends Component<{ fallbackError: AppState['fallbackError'] }> {
+class ErrorBoundary extends Component<{
+  fallbackError: AppState['fallbackError'];
+  onClientError: (error: Error) => void;
+}> {
   componentDidCatch(error: Error) {
-    store.dispatch(clientError(error));
+    this.props.onClientError(error);
   }
   render() {
     const { fallbackError, children } = this.props;
@@ -23,7 +26,11 @@ class ErrorBoundary extends Component<{ fallbackError: AppState['fallbackError']
         return (
           <Error
             header="Something Went Wrong."
-            content="There was an error with our services."
+            content={
+              this.props.fallbackError
+                ? this.props.fallbackError.error.message
+                : 'There has been a problem with our services.'
+            }
           />
         );
       default:
@@ -31,6 +38,10 @@ class ErrorBoundary extends Component<{ fallbackError: AppState['fallbackError']
     }
   }
 }
-
+const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
+  onClientError: (error: Error) => {
+    dispatch(clientError(error));
+  }
+});
 const mapStateToProps = (state: AppState) => ({ fallbackError: state.fallbackError });
-export default connect(mapStateToProps)(ErrorBoundary);
+export default connect(mapStateToProps, mapDispatchToProps)(ErrorBoundary);
