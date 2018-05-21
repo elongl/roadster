@@ -1,7 +1,11 @@
 import AppState from '../typings/AppState';
 import { UserLocationAction } from '../actions/userLocation';
+import { Reducer } from 'redux';
 
-const user = (state: AppState['userLocation'] = null, action: UserLocationAction) => {
+const user: Reducer<AppState['userLocation'], UserLocationAction> = (
+  state = null,
+  action
+) => {
   switch (action.type) {
     case 'SET_USER_LOCATION':
       return action.coordinates;
