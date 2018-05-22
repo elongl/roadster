@@ -109,5 +109,7 @@ class RidePage extends Component<
   }
 }
 
-const mapStateToProps = (state: AppState) => ({ userLocation: state.userLocation });
-export default connect(mapStateToProps, { clientError, setUserLocation })(RidePage);
+export default connect((state: AppState) => ({ userLocation: state.userLocation }), {
+  clientError,
+  setUserLocation
+})(RidePage);

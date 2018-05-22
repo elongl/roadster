@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
@@ -8,7 +8,6 @@ import AuthRoute from './components/routing/AuthRoute';
 import Ride from './pages/Ride';
 import Drive from './pages/Drive';
 import UnfoundRoute from './components/routing/UnfoundRoute';
-import TransitionSwitch from './components/routing/TransitionSwitch';
 
 class AppRouter extends Component {
   state = { loading: true };
@@ -24,14 +23,14 @@ class AppRouter extends Component {
     }
 
     return (
-      <TransitionSwitch>
+      <Switch>
         <Route exact path="/login" component={Login} />
         <AuthRoute exact path="/" component={Home} />
         <AuthRoute exact path="/profile" component={Profile} />
         <AuthRoute path="/drive" component={Drive} />
         <AuthRoute exact path="/ride" component={Ride} />
         <Route component={UnfoundRoute} />
-      </TransitionSwitch>
+      </Switch>
     );
   }
 }

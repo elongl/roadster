@@ -27,5 +27,4 @@ const Profile: StatelessComponent<{
     </>
   </div>
 );
-const mapStateToProps = (state: AppState) => ({ user: state.user });
-export default connect(mapStateToProps)(Profile);
+export default connect((state: AppState) => ({ user: state.user }))(Profile);

@@ -38,5 +38,6 @@ class ErrorBoundary extends Component<{
   }
 }
 
-const mapStateToProps = (state: AppState) => ({ fallbackError: state.fallbackError });
-export default connect(mapStateToProps, { clientError })(ErrorBoundary);
+export default connect((state: AppState) => ({ fallbackError: state.fallbackError }), {
+  clientError
+})(ErrorBoundary);

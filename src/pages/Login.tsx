@@ -15,5 +15,4 @@ const Login: StatelessComponent<{ user: AppState['user'] }> = ({ user }) => {
   return <Introduction />;
 };
 
-const mapStateToProps = (state: AppState) => ({ user: state.user });
-export default connect(mapStateToProps)(Login);
+export default connect((state: AppState) => ({ user: state.user }))(Login);

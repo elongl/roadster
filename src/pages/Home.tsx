@@ -34,10 +34,9 @@ const Home: StatelessComponent<{ isDriver: UserDetails['isDriver'] }> = ({
   </div>
 );
 
-const mapStateToProps = (state: AppState) => ({
+export default connect((state: AppState) => ({
   isDriver: state.user && state.user.isDriver
-});
-export default connect(mapStateToProps)(Home);
+}))(Home);
 
 interface LinkButton {
   to: string;

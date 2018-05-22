@@ -20,5 +20,4 @@ const AuthRoute: StatelessComponent<
     />
   );
 };
-const mapStateToProps = (state: AppState) => ({ user: state.user });
-export default connect(mapStateToProps)(AuthRoute);
+export default connect((state: AppState) => ({ user: state.user }))(AuthRoute);

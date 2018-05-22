@@ -31,7 +31,7 @@ class RidesList extends Component {
     const { userRides, ridesLoaded } = this.state;
     return (
       <TransitionGroup
-        animation="horizontal flip"
+        animation="vertical flip"
         style={{ ...center, width: '100%', marginTop: '1rem' }}
       >
         {ridesLoaded ? (
