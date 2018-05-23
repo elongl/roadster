@@ -1,8 +1,14 @@
-import React, { Component } from 'react';
+import React, { StatelessComponent, Component } from 'react';
 import { SemanticICONS, Sidebar, Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-const LinkButton = ({ content, icon, to }: LinkButton) => (
+interface LinkButton {
+  content: string;
+  icon: SemanticICONS;
+  to: string;
+}
+
+const LinkButton: StatelessComponent<LinkButton> = ({ content, icon, to }) => (
   <Menu.Item as={Link} to={to}>
     <Icon name={icon} />
     {content}
@@ -53,7 +59,6 @@ class SidebarMenu extends Component {
 
   render() {
     const { visible } = this.state;
-
     return (
       <div style={{ position: 'fixed', top: '0.75rem', left: '0.75rem', zIndex: 1 }}>
         <Icon
@@ -90,8 +95,3 @@ class SidebarMenu extends Component {
   }
 }
 export default SidebarMenu;
-interface LinkButton {
-  content: string;
-  icon: SemanticICONS;
-  to: string;
-}

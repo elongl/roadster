@@ -9,7 +9,7 @@ const request = axios.create({
 request.interceptors.request.use(undefined, error => {
   store.dispatch(networkError(error));
   // Send error to server.
-  return Promise.reject(error);
+  throw error;
 });
 
 request.interceptors.response.use(undefined, error => {
@@ -17,7 +17,7 @@ request.interceptors.response.use(undefined, error => {
     store.dispatch(networkError(error));
   }
   // Send error to server.
-  return Promise.reject(error);
+  throw error;
 });
 
 export default request;

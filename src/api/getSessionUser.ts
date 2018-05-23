@@ -1,12 +1,13 @@
 import request from './request';
-const getUser = () =>
-  request.get('/auth/user').then(
-    ({ data: user }) => user,
-    error => {
-      if (!error.response) {
-        return Promise.reject(error);
-      }
-      return Promise.resolve(null);
+const getSessionUser = async () => {
+  try {
+    const { data: user } = await request.get('/auth/user');
+    return user;
+  } catch (err) {
+    if (!err.response) {
+      throw err;
     }
-  );
-export default getUser;
+    return null;
+  }
+};
+export default getSessionUser;
