@@ -1,4 +1,5 @@
 import request from './request';
+import UserDetails from '../typings/UserDetails';
 const getSessionUser = async () => {
   try {
     const { data: user } = await request.get('/auth/user');
@@ -10,4 +11,4 @@ const getSessionUser = async () => {
     return null;
   }
 };
-export default getSessionUser;
+export default getSessionUser as () => Promise<UserDetails | null>;

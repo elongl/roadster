@@ -1,5 +1,6 @@
 import request from './request';
 import UserDetails from '../typings/UserDetails';
-const updateUser = (changedProperties: Partial<UserDetails>) =>
-  request.patch('/user', changedProperties);
-export default updateUser;
+const updateUser = async (changedProperties: Partial<UserDetails>) => {
+  await request.patch('/user', changedProperties);
+};
+export default updateUser as (changedProperties: Partial<UserDetails>) => Promise<void>;

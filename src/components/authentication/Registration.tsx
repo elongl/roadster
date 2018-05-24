@@ -3,9 +3,10 @@ import PhoneNumberForm from './PhoneNumberForm';
 import IsDriverForm from './IsDriverForm';
 import viewportCenter from '../../styles/viewportCenter';
 import updateUser from '../../api/updateUser';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 class Registration extends Component<
-  {},
+  RouteComponentProps<{}>,
   { stage: number; phoneNumber: string; isDriver: boolean | undefined }
 > {
   state = {
@@ -26,7 +27,7 @@ class Registration extends Component<
     const phoneNumber = this.state.phoneNumber.replace('-', '');
     const { isDriver } = this.state;
     updateUser({ phoneNumber, isDriver }).then(() => this.pushStage());
-    setTimeout(() => location.reload(), 2500);
+    setTimeout(() => this.props.history.push('/'), 2750);
   };
 
   pushStage = () => {
@@ -57,4 +58,4 @@ class Registration extends Component<
     );
   }
 }
-export default Registration;
+export default withRouter(Registration);

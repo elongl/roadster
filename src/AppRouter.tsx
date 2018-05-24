@@ -8,6 +8,7 @@ import AuthRoute from './components/routing/AuthRoute';
 import Ride from './pages/Ride';
 import Drive from './pages/Drive';
 import UnfoundRoute from './components/routing/UnfoundRoute';
+import DriverRoute from './components/routing/DriverRoute';
 
 class AppRouter extends Component {
   state = { loading: true };
@@ -27,7 +28,7 @@ class AppRouter extends Component {
         <Route exact path="/login" component={Login} />
         <AuthRoute exact path="/" component={Home} />
         <AuthRoute exact path="/profile" component={Profile} />
-        <AuthRoute path="/drive" component={Drive} />
+        <DriverRoute path="/drive" component={Drive} />
         <AuthRoute exact path="/ride" component={Ride} />
         <Route component={UnfoundRoute} />
       </Switch>

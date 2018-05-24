@@ -1,3 +1,4 @@
 import request from './request';
-const getUser = (id: number) => request.get(`user/${id}`);
-export default getUser;
+import UserDetails from '../typings/UserDetails';
+const getUser = async (id: number) => (await request.get(`user/${id}`)).data;
+export default getUser as (id: number) => Promise<UserDetails>;

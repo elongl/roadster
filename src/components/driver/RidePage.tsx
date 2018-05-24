@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import request from '../../api/request';
 import { RouteComponentProps } from 'react-router-dom';
 import UserRide from '../../typings/UserRide';
 import SidebarTitle from '../common/SidebarTitle';
@@ -10,6 +9,8 @@ import { clientError } from '../../actions/fallbackError';
 import { connect } from 'react-redux';
 import AppState from '../../typings/AppState';
 import { setUserLocation } from '../../actions/userLocation';
+import getRide from '../../api/getRide';
+import getUser from '../../api/getUser';
 
 class RidePage extends Component<
   {
@@ -23,8 +24,8 @@ class RidePage extends Component<
   async componentDidMount() {
     const { rideId } = this.props.match.params;
     try {
-      const { data: ride } = await request.get(`/ride/${rideId}`);
-      const { data: user } = await request.get(`/user/${ride.riderId}`);
+      const ride = await getRide(rideId);
+      const user = await getUser(ride.riderId);
       this.setState({ userRide: { ride, user } });
     } catch (err) {
       this.props.history.push('/drive');
@@ -98,7 +99,7 @@ class RidePage extends Component<
             </>
           ) : (
             <Dimmer active>
-              <Loader size="big" indeterminate>
+              <Loader size="big" inverted indeterminate>
                 Tracking Your Location.
               </Loader>
             </Dimmer>
