@@ -74,7 +74,7 @@ class RidePage extends Component<
                 destination={ride.destination}
               />
 
-              <Button.Group size="large" style={{ width: '85%', marginTop: '1rem' }}>
+              <Button.Group size="large" style={{ width: '85%', margin: '1rem' }}>
                 <Button style={{ width: '50%' }} color="orange">
                   Let's Roll!
                 </Button>
