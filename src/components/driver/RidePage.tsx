@@ -1,54 +1,45 @@
 import React, { Component } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import UserRide from '../../typings/UserRide';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
 import SidebarTitle from '../common/SidebarTitle';
 import { Segment, Button, Loader, Dimmer } from 'semantic-ui-react';
 import center from '../../styles/center';
 import DirectionsMap from '../maps/DirectionsMap';
-import { clientError } from '../../actions/fallbackError';
 import { connect } from 'react-redux';
 import AppState from '../../typings/AppState';
-import { setUserLocation } from '../../actions/userLocation';
-import getRide from '../../api/getRide';
-import getUser from '../../api/getUser';
+import { clientError as clientErrorAction } from '../../actions/fallbackError';
+import { setUserLocation as setUserLocationAction } from '../../actions/userLocation';
 
 class RidePage extends Component<
   {
-    clientError: typeof clientError;
-    setUserLocation: typeof setUserLocation;
-    userLocation: Coordinates | null;
+    clientError: typeof clientErrorAction;
+    setUserLocation: typeof setUserLocationAction;
+    userLocation: AppState['userLocation'];
+    waitingRides: AppState['waitingRides'];
   } & RouteComponentProps<{ rideId: number }>
 > {
-  state: { userRide: UserRide | undefined } = { userRide: undefined };
-
-  async componentDidMount() {
-    const { rideId } = this.props.match.params;
+  componentDidMount() {
+    const { userLocation, setUserLocation, clientError } = this.props;
     try {
-      const ride = await getRide(rideId);
-      const user = await getUser(ride.riderId);
-      this.setState({ userRide: { ride, user } });
-    } catch (err) {
-      this.props.history.push('/drive');
-    }
-
-    try {
-      if (!this.props.userLocation) {
-        navigator.geolocation.getCurrentPosition(({ coords }) =>
-          this.props.setUserLocation(coords)
-        );
+      if (!userLocation) {
+        navigator.geolocation.getCurrentPosition(({ coords }) => setUserLocation(coords));
       }
     } catch (err) {
-      this.props.clientError(new Error('We were unable to track your location.'));
+      clientError(new Error('We were unable to track your location.'));
     }
   }
 
   render() {
-    if (!this.state.userRide) {
+    const { waitingRides, userLocation } = this.props;
+    if (!waitingRides) {
       return <Loader />;
     }
-    const { userLocation } = this.props;
-    const { user, ride } = this.state.userRide;
-
+    const thisRide = waitingRides.find(
+      waitingRide => waitingRide.ride.id === Number(this.props.match.params.rideId)
+    );
+    if (!thisRide) {
+      return <Redirect to="/drive" />;
+    }
+    const { user, ride } = thisRide;
     return (
       <>
         <SidebarTitle title={user.displayName} />
@@ -110,7 +101,13 @@ class RidePage extends Component<
   }
 }
 
-export default connect((state: AppState) => ({ userLocation: state.userLocation }), {
-  clientError,
-  setUserLocation
-})(RidePage);
+export default connect(
+  (state: AppState) => ({
+    userLocation: state.userLocation,
+    waitingRides: state.waitingRides
+  }),
+  {
+    clientError: clientErrorAction,
+    setUserLocation: setUserLocationAction
+  }
+)(RidePage);
