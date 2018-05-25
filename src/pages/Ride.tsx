@@ -1,11 +1,11 @@
 import React, { StatelessComponent } from 'react';
 import SidebarTitle from '../components/common/SidebarTitle';
-import RideForm from '../components/rider/RideForm';
+import RideCreation from '../components/rider/RideCreation';
 
 const Ride: StatelessComponent = () => (
   <div>
     <SidebarTitle title="Pick a destination." />
-    <RideForm />
+    <RideCreation />
   </div>
 );
 

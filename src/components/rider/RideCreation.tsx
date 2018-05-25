@@ -11,7 +11,7 @@ import RideConfirmation from './RideConfirmation';
 import RideCreated from './RideCreated';
 import MessageLoader from '../common/MessageLoader';
 
-class RideForm extends Component<{
+class RideCreation extends Component<{
   setUserLocation: typeof setUserLocationAction;
   clientError: typeof clientErrorAction;
   userLocation: AppState['userLocation'];
@@ -137,4 +137,4 @@ const mapStateToProps = (state: AppState) => ({ userLocation: state.userLocation
 export default connect(mapStateToProps, {
   setUserLocation: setUserLocationAction,
   clientError: clientErrorAction
-})(RideForm);
+})(RideCreation);

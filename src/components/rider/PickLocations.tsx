@@ -26,7 +26,7 @@ const PickLocations: StatelessComponent<PickLocations> = ({
     <Radio
       toggle
       label="My Location"
-      style={{ marginBottom: '1rem' }}
+      style={{ marginBottom: '1rem', zIndex: 0 }}
       checked={origin.myLocation}
       onChange={() => myLocationToggle()}
     />
