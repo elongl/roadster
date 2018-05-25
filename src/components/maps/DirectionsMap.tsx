@@ -11,9 +11,10 @@ import { connect } from 'react-redux';
 
 class DirectionsMap extends Component<{
   origin: string | google.maps.LatLng;
-  pickup: string;
+  pickup?: string;
   destination: string;
   clientError: typeof clientError;
+  fallback?: () => void;
 }> {
   state: { directions: google.maps.DirectionsResult | undefined } = {
     directions: undefined
@@ -22,54 +23,59 @@ class DirectionsMap extends Component<{
   componentDidMount() {
     const DirectionsService = new google.maps.DirectionsService();
     const { origin, pickup, destination } = this.props;
-    DirectionsService.route(
-      {
-        origin,
-        waypoints: [{ location: pickup, stopover: true }],
-        destination,
-        travelMode: google.maps.TravelMode.DRIVING
-      },
-      (result, status) => {
-        if (status === google.maps.DirectionsStatus.OK) {
-          this.setState({ directions: result });
+
+    let route: google.maps.DirectionsRequest = {
+      origin,
+
+      destination,
+      travelMode: google.maps.TravelMode.DRIVING
+    };
+    if (pickup) {
+      route.waypoints = [{ location: pickup, stopover: true }];
+    }
+    DirectionsService.route(route, (result, status) => {
+      if (status === google.maps.DirectionsStatus.OK) {
+        this.setState({ directions: result });
+      } else {
+        if (this.props.fallback) {
+          this.props.fallback();
         } else {
           this.props.clientError(new Error('Failed to load map.'));
         }
       }
-    );
+    });
   }
 
   render() {
+    const { directions } = this.state;
+
     return (
       <GoogleMap
         defaultZoom={17}
         options={{ gestureHandling: 'greedy', mapTypeControl: false }}
       >
         <DirectionsRenderer directions={this.state.directions} />
-        {this.state.directions &&
-          this.state.directions.routes[0].legs.map(
-            leg =>
-              leg.steps[1] && (
-                <InfoWindow
-                  key={leg.start_address}
-                  position={leg.steps[1].start_location}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <Icon name="car" style={{ fontSize: '1.1rem' }} />
-                      <h5 style={{ margin: 0, color: 'green' }}>{leg.duration.text}</h5>
-                    </div>
-                    <strong style={{ margin: 0 }}>{leg.distance.text}</strong>
-                  </div>
-                </InfoWindow>
-              )
-          )}
+        {directions &&
+          directions.routes[0].legs.map(leg => (
+            <InfoWindow
+              key={leg.start_address}
+              position={leg.steps[Math.floor(leg.steps.length / 2)].start_location}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <Icon name="car" style={{ fontSize: '1.1rem' }} />
+                  <h5 style={{ margin: 0, color: 'green' }}>{leg.duration.text}</h5>
+                </div>
+                <strong style={{ margin: 0 }}>{leg.distance.text}</strong>
+              </div>
+            </InfoWindow>
+          ))}
       </GoogleMap>
     );
   }

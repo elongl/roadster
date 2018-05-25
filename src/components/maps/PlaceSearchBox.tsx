@@ -20,12 +20,19 @@ const PlaceSearchBox: StatelessComponent<PlaceSearchBox> = ({
   let ref: StandaloneSearchBox | null = null;
   return (
     <StandaloneSearchBox
+      bounds={
+        new google.maps.LatLngBounds(
+          new google.maps.LatLng(29.690369, 34.179466),
+          new google.maps.LatLng(33.304843, 35.714534)
+        )
+      }
       onPlacesChanged={() => onPlacesChanged(ref)}
       ref={searchBoxRef => {
         ref = searchBoxRef;
       }}
     >
       <Input
+        spellCheck={false}
         icon={icon}
         iconPosition="left"
         style={{ width: '85%' }}
