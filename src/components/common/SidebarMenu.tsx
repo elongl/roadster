@@ -55,7 +55,10 @@ const routes = [
 
 class SidebarMenu extends Component {
   state = { visible: false };
-  toggleVisibility = () => this.setState({ visible: !this.state.visible });
+  toggleVisibility = () =>
+    this.setState((prevState: { visible: boolean }) => ({
+      visible: !prevState.visible
+    }));
 
   render() {
     const { visible } = this.state;

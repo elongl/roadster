@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import AppState from '../../typings/AppState';
 import { clientError as clientErrorAction } from '../../actions/fallbackError';
 import { setUserLocation as setUserLocationAction } from '../../actions/userLocation';
+import getUserLocation from '../../utils/getUserLocation';
 
 class RidePage extends Component<
   {
@@ -18,13 +19,9 @@ class RidePage extends Component<
   } & RouteComponentProps<{ rideId: number }>
 > {
   componentDidMount() {
-    const { userLocation, setUserLocation, clientError } = this.props;
-    try {
-      if (!userLocation) {
-        navigator.geolocation.getCurrentPosition(({ coords }) => setUserLocation(coords));
-      }
-    } catch (err) {
-      clientError(new Error('We were unable to track your location.'));
+    const { setUserLocation, userLocation, clientError } = this.props;
+    if (!userLocation) {
+      getUserLocation(loc => setUserLocation(loc), err => clientError(err));
     }
   }
 
@@ -67,9 +64,7 @@ class RidePage extends Component<
               <DirectionsMap
                 containerElement={<div style={{ height: '60vh', width: '90%' }} />}
                 mapElement={<div style={{ height: '100%', borderRadius: '1rem' }} />}
-                origin={
-                  new google.maps.LatLng(userLocation.latitude, userLocation.longitude)
-                }
+                origin={userLocation}
                 pickup={ride.origin}
                 destination={ride.destination}
               />

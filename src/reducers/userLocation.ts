@@ -8,7 +8,7 @@ const user: Reducer<AppState['userLocation'], UserLocationAction> = (
 ) => {
   switch (action.type) {
     case 'SET_USER_LOCATION':
-      return action.coordinates;
+      return action.location;
     default:
       return state;
   }

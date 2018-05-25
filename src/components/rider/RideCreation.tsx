@@ -8,8 +8,9 @@ import { clientError as clientErrorAction } from '../../actions/fallbackError';
 import addRide from '../../api/addRide';
 import PickLocations from './PickLocations';
 import RideConfirmation from './RideConfirmation';
-import RideCreated from './RideCreated';
+import WaitingForDriver from './WaitingForDriver';
 import MessageLoader from '../common/MessageLoader';
+import getUserLocation from '../../utils/getUserLocation';
 
 class RideCreation extends Component<{
   setUserLocation: typeof setUserLocationAction;
@@ -26,8 +27,7 @@ class RideCreation extends Component<{
     this.setState({
       [stateName]: {
         ...this.state[stateName],
-        value,
-        isPlace: false
+        value
       }
     });
 
@@ -46,8 +46,7 @@ class RideCreation extends Component<{
 
     this.setState({
       [stateName]: {
-        value: placeName,
-        isPlace: true
+        value: placeName
       }
     });
   };
@@ -57,18 +56,11 @@ class RideCreation extends Component<{
 
   componentDidUpdate() {
     const { stage, origin, destination } = this.state;
-    const geocoder = new google.maps.Geocoder();
     const { userLocation, setUserLocation, clientError } = this.props;
 
     if (stage === 2 && origin.myLocation) {
-      try {
-        if (!userLocation) {
-          navigator.geolocation.getCurrentPosition(({ coords }) =>
-            setUserLocation(coords)
-          );
-        }
-      } catch (err) {
-        clientError(new Error('We were unable to track your location.'));
+      if (!userLocation) {
+        getUserLocation(loc => setUserLocation(loc), err => clientError(err));
       }
     }
 
@@ -79,23 +71,8 @@ class RideCreation extends Component<{
         );
       } else {
         if (userLocation) {
-          geocoder.geocode(
-            {
-              location: new google.maps.LatLng(
-                userLocation.latitude,
-                userLocation.longitude
-              )
-            },
-            (result, status) => {
-              if (status === google.maps.GeocoderStatus.OK) {
-                addRide({
-                  origin: result[0].formatted_address,
-                  destination: destination.value
-                }).then(() => this.pushStage());
-              } else {
-                clientError(new Error('We were unable to track your location.'));
-              }
-            }
+          addRide({ origin: userLocation, destination: destination.value }).then(() =>
+            this.pushStage()
           );
         }
       }
@@ -127,7 +104,7 @@ class RideCreation extends Component<{
           />
         )}
         {stage === 3 && <MessageLoader>Creating your ride.</MessageLoader>}
-        {stage === 4 && <RideCreated />}
+        {stage === 4 && <WaitingForDriver />}
       </div>
     );
   }

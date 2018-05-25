@@ -1,12 +1,12 @@
 import { Action } from 'redux';
 
-const setUserLocation = (coordinates: Coordinates) => ({
+const setUserLocation = (location: string) => ({
   type: 'SET_USER_LOCATION',
-  coordinates
+  location
 });
 
 interface UserLocationAction extends Action {
-  coordinates: Coordinates;
+  location: string;
 }
 
 export { setUserLocation, UserLocationAction };

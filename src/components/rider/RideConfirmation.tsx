@@ -30,7 +30,7 @@ const RideConfirmation: StatelessComponent<RideConfirmation> = ({
       }}
     >
       <span style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <strong>From: </strong> {origin.myLocation ? 'My Location' : origin.value}
+        <strong>From: </strong> {origin.myLocation ? userLocation : origin.value}
       </span>
 
       <span style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -48,11 +48,7 @@ const RideConfirmation: StatelessComponent<RideConfirmation> = ({
           containerElement={<div style={{ height: '60vh', width: '90%' }} />}
           mapElement={<div style={{ height: '100%', borderRadius: '1rem' }} />}
           destination={destination.value}
-          origin={
-            origin.myLocation && userLocation
-              ? new google.maps.LatLng(userLocation.latitude, userLocation.longitude)
-              : origin.value
-          }
+          origin={origin.myLocation && userLocation ? userLocation : origin.value}
         />
         <Button.Group size="large" style={{ width: '85%', margin: '1rem' }}>
           <Button primary style={{ width: '50%' }} onClick={() => pushStage()}>
