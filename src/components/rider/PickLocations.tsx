@@ -1,0 +1,64 @@
+import React, { StatelessComponent } from 'react';
+import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
+import { Segment, Header, Radio, Divider, Button } from 'semantic-ui-react';
+import PlaceSearchBox from '../maps/PlaceSearchBox';
+import center from '../../styles/center';
+
+interface PickLocations {
+  origin: { value: string; myLocation: boolean };
+  destination: { value: string };
+  textChange: (state: string, newText: string) => void;
+  placeChange: (state: string, ref: StandaloneSearchBox | null) => void;
+  myLocationToggle: () => void;
+  pushStage: () => void;
+}
+
+const PickLocations: StatelessComponent<PickLocations> = ({
+  origin,
+  destination,
+  textChange,
+  placeChange,
+  myLocationToggle,
+  pushStage
+}) => (
+  <Segment raised style={{ marginTop: '1rem', width: '85%', ...center }}>
+    <Header>Where shall we pick you up</Header>
+    <Radio
+      toggle
+      label="My Location"
+      style={{ marginBottom: '1rem' }}
+      checked={origin.myLocation}
+      onChange={() => myLocationToggle()}
+    />
+    {!origin.myLocation && (
+      <PlaceSearchBox
+        icon="anchor"
+        placeholder="Choose starting point."
+        value={origin.value}
+        onChange={event => textChange('origin', event.currentTarget.value)}
+        onPlacesChanged={ref => placeChange('origin', ref)}
+      />
+    )}
+
+    <Divider style={{ width: '90%' }} />
+    <Header style={{ marginTop: 0 }}>Where would you like to go</Header>
+
+    <PlaceSearchBox
+      icon="location arrow"
+      placeholder="Choose destination."
+      value={destination.value}
+      onChange={event => textChange('destination', event.currentTarget.value)}
+      onPlacesChanged={ref => placeChange('destination', ref)}
+    />
+
+    <Button
+      primary
+      size="large"
+      content="Find a Driver"
+      style={{ marginTop: '1rem', width: '75%' }}
+      onClick={() => pushStage()}
+    />
+  </Segment>
+);
+
+export default PickLocations;
