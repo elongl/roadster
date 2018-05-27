@@ -13,6 +13,7 @@ const RideCard: StatelessComponent<RideCard> = ({ userRide, className }) => (
   >
     <Card.Content>
       <Image
+        avatar
         floated="right"
         size="mini"
         src={
