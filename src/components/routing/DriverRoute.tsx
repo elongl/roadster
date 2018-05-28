@@ -1,8 +1,7 @@
 import React, { ComponentType, StatelessComponent } from 'react';
 import { connect } from 'react-redux';
-import { RouteProps, Route } from 'react-router-dom';
+import { RouteProps, Route, Redirect } from 'react-router-dom';
 import AppState from '../../typings/AppState';
-import TransitionRedirect from './TransitionRedirect';
 
 const DriverRoute: StatelessComponent<
   RouteProps & {
@@ -14,7 +13,7 @@ const DriverRoute: StatelessComponent<
   return (
     <Route
       {...routeProps}
-      render={() => (isUserDriver ? <DriverComponent /> : <TransitionRedirect to="/" />)}
+      render={() => (isUserDriver ? <DriverComponent /> : <Redirect to="/" />)}
     />
   );
 };

@@ -21,7 +21,7 @@ const PickLocations: StatelessComponent<PickLocations> = ({
   myLocationToggle,
   pushStage
 }) => (
-  <Segment raised style={{ marginTop: '1rem', width: '85%', ...center }}>
+  <Segment raised style={{ margin: '2rem', width: '85%', ...center }}>
     <Header>Where shall we pick you up</Header>
     <Radio
       toggle

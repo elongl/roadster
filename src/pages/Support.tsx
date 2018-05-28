@@ -9,7 +9,7 @@ import {
 } from 'semantic-ui-react';
 import SidebarTitle from '../components/common/SidebarTitle';
 const myPic =
-  'https://avatars0.githubusercontent.com/u/30181361?s=400&u=8a55ed4fa15d6e55bbc47dff654d67c38292e827&v=4';
+  'https://pbs.twimg.com/profile_images/981556642708901889/WaCxEKDG_400x400.jpg';
 
 const ContactButton: StatelessComponent<{
   content: string;
@@ -58,8 +58,16 @@ const Support: StatelessComponent = () => (
           link="https://twitter.com/elongli"
         />
       </div>
-      <Image rounded size="small" src={myPic} style={{ marginTop: '1rem' }} />
-      <Header size="huge" style={{ color: 'white', margin: 0, marginTop: '1rem' }}>
+      <Image
+        rounded
+        size="small"
+        src={myPic}
+        style={{ marginTop: '1rem', height: 150 }}
+      />
+      <Header
+        size="huge"
+        style={{ color: 'white', marginBottom: '3rem', marginTop: '1rem' }}
+      >
         Elon Gliksberg
       </Header>
     </div>

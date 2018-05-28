@@ -34,10 +34,11 @@ const Introduction: StatelessComponent = () => (
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: '1rem'
+        marginTop: '1rem',
+        marginBottom: '3rem'
       }}
     >
-      <h1 style={{ color: 'white', marginTop: '1rem' }}>Get Started</h1>
+      <h1 style={{ color: 'white' }}>Get Started</h1>
       <SocialNetworkButton name="Google" colorAndIcon="google plus" />
       <SocialNetworkButton name="Facebook" colorAndIcon="facebook" />
       <SocialNetworkButton name="Twitter" colorAndIcon="twitter" />

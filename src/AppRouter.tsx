@@ -27,7 +27,7 @@ class AppRouter extends Component {
 
     return (
       <>
-        <SidebarMenu />
+        {location.pathname !== '/login' && <SidebarMenu />}
         <Switch>
           <Route exact path="/login" component={Login} />
           <AuthRoute exact path="/" component={Home} />

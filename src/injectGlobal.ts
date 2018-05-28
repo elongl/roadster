@@ -8,12 +8,12 @@ html, body {
 
 @media only screen and (min-width: 600px) {
     html, body {
-        font-size: 35px;
+        font-size: 25px;
     }
 }
 @media only screen and (min-width: 1100px) {
     html, body {
-        font-size: 45px;
+        font-size: 35px;
     }
 }
 
