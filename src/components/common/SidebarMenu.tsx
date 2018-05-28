@@ -6,10 +6,16 @@ interface LinkButton {
   content: string;
   icon: SemanticICONS;
   to: string;
+  toggleVisibility: () => void;
 }
 
-const LinkButton: StatelessComponent<LinkButton> = ({ content, icon, to }) => (
-  <Menu.Item as={Link} to={to}>
+const LinkButton: StatelessComponent<LinkButton> = ({
+  content,
+  icon,
+  to,
+  toggleVisibility
+}) => (
+  <Menu.Item as={Link} to={to} onClick={toggleVisibility}>
     <Icon name={icon} />
     {content}
   </Menu.Item>
@@ -35,11 +41,6 @@ const routes = [
     content: 'Profile',
     icon: 'user circle' as SemanticICONS,
     to: '/profile'
-  },
-  {
-    content: 'Settings',
-    icon: 'settings' as SemanticICONS,
-    to: '/settings'
   },
   {
     content: 'Help & Support',
@@ -86,6 +87,7 @@ class SidebarMenu extends Component {
           </Menu.Item>
           {routes.map(route => (
             <LinkButton
+              toggleVisibility={this.toggleVisibility}
               content={route.content}
               icon={route.icon}
               key={route.to}

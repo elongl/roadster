@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import AppState from '../typings/AppState';
 import { connect } from 'react-redux';
 import UserDetails from '../typings/UserDetails';
-import SidebarMenu from '../components/common/SidebarMenu';
 
 const LinkButton: StatelessComponent<LinkButton> = props => (
   <Button
@@ -25,7 +24,6 @@ const Home: StatelessComponent<{ isDriver: UserDetails['isDriver'] }> = ({
   isDriver
 }) => (
   <div style={viewportCenter}>
-    <SidebarMenu />
     <LinkButton to="/ride" content="Get a Ride" icon="car" />
     <Divider horizontal style={{ color: 'white' }}>
       OR
