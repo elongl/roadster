@@ -32,6 +32,7 @@ const PlaceSearchBox: StatelessComponent<PlaceSearchBox> = ({
       }}
     >
       <Input
+        required
         spellCheck={false}
         icon={icon}
         iconPosition="left"
