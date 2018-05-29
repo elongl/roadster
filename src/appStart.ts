@@ -1,7 +1,7 @@
-import getSessionUser from './api/getSessionUser';
+import getSessionUser from './api/read/getSessionUser';
 import store from './store';
 import { serializeUser } from './actions/user';
-import getUserRide from './api/getUserRide';
+import getUserRide from './api/read/getUserRide';
 import { setActiveRide } from './actions/activeRide';
 
 const appStart = async () => {
@@ -9,7 +9,9 @@ const appStart = async () => {
   if (user) {
     store.dispatch(serializeUser(user));
     const userRide = await getUserRide(user.id);
-    store.dispatch(setActiveRide(userRide));
+    if (userRide) {
+      store.dispatch(setActiveRide(userRide));
+    }
   }
 };
 export default appStart;

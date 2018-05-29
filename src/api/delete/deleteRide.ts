@@ -1,4 +1,4 @@
-import request from './request';
+import request from '../request';
 const deleteRide = async () => {
   await request.delete('/ride');
 };

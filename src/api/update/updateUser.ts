@@ -1,5 +1,5 @@
-import request from './request';
-import UserDetails from '../typings/UserDetails';
+import request from '../request';
+import UserDetails from '../../typings/UserDetails';
 const updateUser = async (changedProperties: Partial<UserDetails>) => {
   await request.patch('/user', changedProperties);
 };

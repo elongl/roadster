@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import WaitingForDriver from './WaitingForDriver';
-import deleteRide from '../../api/deleteRide';
+import deleteRide from '../../api/delete/deleteRide';
 import { removeActiveRide } from '../../actions/activeRide';
 import { connect } from 'react-redux';
 

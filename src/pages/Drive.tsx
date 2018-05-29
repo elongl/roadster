@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import AppState from '../typings/AppState';
-import getUser from '../api/getUser';
+import getUser from '../api/read/getUser';
 import { connect } from 'react-redux';
 import { setWaitingRides } from '../actions/waitingRides';
 import RidesLookup from '../components/driver/RidesLookup';
 import RidePage from '../components/driver/RidePage';
 import { Switch, Route, withRouter, RouteComponentProps } from 'react-router-dom';
-import getWaitingRides from '../api/getWaitingRides';
+import getWaitingRides from '../api/read/getWaitingRides';
 import RideDetails from '../typings/RideDetails';
 
 class Drive extends Component<

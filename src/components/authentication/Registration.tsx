@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PhoneNumberForm from './PhoneNumberForm';
 import IsDriverForm from './IsDriverForm';
 import viewportCenter from '../../styles/viewportCenter';
-import updateUser from '../../api/updateUser';
+import updateUser from '../../api/update/updateUser';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 class Registration extends Component<

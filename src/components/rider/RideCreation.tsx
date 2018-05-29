@@ -6,7 +6,7 @@ import AppState from '../../typings/AppState';
 import { setUserLocation as setUserLocationAction } from '../../actions/userLocation';
 import { clientError as clientErrorAction } from '../../actions/fallbackError';
 import { setActiveRide as setActiveRideAction } from '../../actions/activeRide';
-import addRide from '../../api/addRide';
+import addRide from '../../api/create/addRide';
 import PickLocations from '../../components/rider/PickLocations';
 import RideConfirmation from '../../components/rider/RideConfirmation';
 import MessageLoader from '../../components/common/MessageLoader';
