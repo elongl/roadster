@@ -85,6 +85,7 @@ class RideCreation extends Component<{
             origin: chosenOrigin,
             destination: destination.value,
             riderId: user.id,
+            driverId: null,
             status: 'waiting'
           });
         }

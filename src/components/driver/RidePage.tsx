@@ -9,6 +9,7 @@ import AppState from '../../typings/AppState';
 import { clientError as clientErrorAction } from '../../actions/fallbackError';
 import { setUserLocation as setUserLocationAction } from '../../actions/userLocation';
 import getUserLocation from '../../utils/getUserLocation';
+import matchDriver from '../../api/update/matchDriver';
 
 class RidePage extends Component<
   {
@@ -70,7 +71,11 @@ class RidePage extends Component<
               />
 
               <Button.Group size="large" style={{ width: '85%', margin: '1rem' }}>
-                <Button style={{ width: '50%' }} color="orange">
+                <Button
+                  style={{ width: '50%' }}
+                  color="orange"
+                  onClick={() => matchDriver(this.props.match.params.rideId)}
+                >
                   Let's Roll!
                 </Button>
                 <Button.Or style={{ textTransform: 'uppercase' }} />
