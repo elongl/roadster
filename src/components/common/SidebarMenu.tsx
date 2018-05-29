@@ -15,10 +15,7 @@ const LinkButton: StatelessComponent<LinkButton> = ({
   to,
   toggleVisibility
 }) => (
-  <Menu.Item as={Link} to={to} onClick={toggleVisibility}>
-    <Icon name={icon} />
-    {content}
-  </Menu.Item>
+  <Menu.Item as={Link} to={to} onClick={toggleVisibility} content={content} icon={icon} />
 );
 
 const routes = [
@@ -81,10 +78,7 @@ class SidebarMenu extends Component {
           animation="overlay"
           style={{ width: '10rem' }}
         >
-          <Menu.Item onClick={this.toggleVisibility}>
-            <Icon name="cancel" />
-            Cancel
-          </Menu.Item>
+          <Menu.Item content="Cancel" icon="cancel" onClick={this.toggleVisibility} />
           {routes.map(route => (
             <LinkButton
               toggleVisibility={this.toggleVisibility}

@@ -39,7 +39,7 @@ class Drive extends Component<
 
   render() {
     if (this.props.isActiveRide) {
-      return <Redirect to="/" />;
+      return <Redirect to="/ride" />;
     }
     return (
       <Switch>
