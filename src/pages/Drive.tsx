@@ -5,12 +5,19 @@ import { connect } from 'react-redux';
 import { setWaitingRides } from '../actions/waitingRides';
 import RidesLookup from '../components/driver/RidesLookup';
 import RidePage from '../components/driver/RidePage';
-import { Switch, Route, withRouter, RouteComponentProps } from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  withRouter,
+  RouteComponentProps,
+  Redirect
+} from 'react-router-dom';
 import getWaitingRides from '../api/read/getWaitingRides';
 import RideDetails from '../typings/RideDetails';
 
 class Drive extends Component<
   {
+    isActiveRide: boolean;
     waitingRides: AppState['waitingRides'];
     setWaitingRides: typeof setWaitingRides;
   } & RouteComponentProps<{}>
@@ -31,6 +38,9 @@ class Drive extends Component<
   }
 
   render() {
+    if (this.props.isActiveRide) {
+      return <Redirect to="/" />;
+    }
     return (
       <Switch>
         <Route exact path="/drive" component={RidesLookup} />
@@ -40,5 +50,8 @@ class Drive extends Component<
   }
 }
 
-const mapStateToProps = (state: AppState) => ({ waitingRides: state.waitingRides });
+const mapStateToProps = (state: AppState) => ({
+  waitingRides: state.waitingRides,
+  isActiveRide: Boolean(state.activeRide)
+});
 export default withRouter(connect(mapStateToProps, { setWaitingRides })(Drive));

@@ -20,20 +20,27 @@ const LinkButton: StatelessComponent<LinkButton> = props => (
   </Button>
 );
 
-const Home: StatelessComponent<{ isDriver: UserDetails['isDriver'] }> = ({
-  isDriver
-}) => (
+const Home: StatelessComponent<{
+  isDriver: UserDetails['isDriver'];
+  isActiveRide: boolean;
+}> = ({ isDriver, isActiveRide }) => (
   <div style={viewportCenter}>
     <LinkButton to="/ride" content="Get a Ride" icon="car" />
     <Divider horizontal style={{ color: 'white' }}>
       OR
     </Divider>
-    <LinkButton to="/drive" content="Be a Driver" icon="taxi" disabled={!isDriver} />
+    <LinkButton
+      to="/drive"
+      content="Be a Driver"
+      icon="taxi"
+      disabled={!isDriver || isActiveRide}
+    />
   </div>
 );
 
 export default connect((state: AppState) => ({
-  isDriver: state.user && state.user.isDriver
+  isDriver: state.user && state.user.isDriver,
+  isActiveRide: Boolean(state.activeRide)
 }))(Home);
 
 interface LinkButton {

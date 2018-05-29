@@ -1,6 +1,7 @@
 import React, { StatelessComponent } from 'react';
 import viewportCenter from '../../styles/viewportCenter';
 import { Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 const WaitingForDriver: StatelessComponent<{ deleteRide: () => void }> = ({
   deleteRide
 }) => (
@@ -16,6 +17,8 @@ const WaitingForDriver: StatelessComponent<{ deleteRide: () => void }> = ({
       color="youtube"
       content="Cancel Ride"
       labelPosition="right"
+      as={Link}
+      to="/"
       style={{ marginTop: '1.5rem', width: '70%' }}
       onClick={() => deleteRide()}
     />
