@@ -1,17 +1,17 @@
 import { Action } from 'redux';
 import UserDetails from '../typings/UserDetails';
 
-const serializeUser = (user: UserDetails) => ({
-  type: 'SERIALIZE_USER',
+const loginUser = (user: UserDetails) => ({
+  type: 'USER_LOGIN',
   user
 });
 
-const deserializeUser = () => ({
-  type: 'DESERIALIZE_USER'
+const logoutUser = () => ({
+  type: 'USER_LOGOUT'
 });
 
 interface UserAction extends Action {
   user: UserDetails;
 }
 
-export { serializeUser, deserializeUser, UserAction };
+export { loginUser, logoutUser, UserAction };
