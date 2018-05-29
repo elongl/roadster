@@ -3,7 +3,11 @@ import UserDetails from '../../typings/UserDetails';
 import MessageLoader from '../common/MessageLoader';
 import { Image, Button } from 'semantic-ui-react';
 import viewportCenter from '../../styles/viewportCenter';
-const DriverFound: StatelessComponent<{ driver: UserDetails | null }> = ({ driver }) => {
+import { Link } from 'react-router-dom';
+const DriverFound: StatelessComponent<{
+  driver: UserDetails | null;
+  deleteRide: () => void;
+}> = ({ driver, deleteRide }) => {
   if (!driver) {
     return <MessageLoader>Loading your Driver.</MessageLoader>;
   }
@@ -32,11 +36,14 @@ const DriverFound: StatelessComponent<{ driver: UserDetails | null }> = ({ drive
         content="Pick me up!"
       />
       <Button
+        as={Link}
         color="google plus"
+        to="/"
         size="large"
         style={{ width: '60%', marginTop: '0.5rem' }}
         icon="cancel"
         content="Nevermind, cancel."
+        onClick={deleteRide}
       />
     </div>
   );

@@ -12,6 +12,8 @@ import RideConfirmation from '../../components/rider/RideConfirmation';
 import MessageLoader from '../../components/common/MessageLoader';
 import getUserLocation from '../../utils/getUserLocation';
 import SidebarTitle from '../../components/common/SidebarTitle';
+import getUserRide from '../../api/read/getUserRide';
+import socket from '../../api/socket';
 
 class RideCreation extends Component<{
   setUserLocation: typeof setUserLocationAction;
@@ -87,6 +89,10 @@ class RideCreation extends Component<{
             riderId: user.id,
             driverId: null,
             status: 'waiting'
+          });
+          socket.on(`matchdriver/${id}`, async () => {
+            const activeRideWithDriver = await getUserRide(user.id);
+            setActiveRide(activeRideWithDriver);
           });
         }
       } catch (ex) {
