@@ -24,7 +24,6 @@ class AppRouter extends Component {
     if (this.state.loading) {
       return null;
     }
-
     return (
       <>
         {location.pathname !== '/login' && <SidebarMenu />}

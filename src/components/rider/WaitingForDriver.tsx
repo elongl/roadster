@@ -1,7 +1,9 @@
 import React, { StatelessComponent } from 'react';
 import viewportCenter from '../../styles/viewportCenter';
 import { Button } from 'semantic-ui-react';
-const WaitingForDriver: StatelessComponent = () => (
+const WaitingForDriver: StatelessComponent<{ deleteRide: () => void }> = ({
+  deleteRide
+}) => (
   <div style={{ ...viewportCenter, color: 'white' }}>
     <h2 style={{ margin: '0.5rem' }}>The driver hunt has begun!</h2>
     <h3 style={{ margin: 0, fontStyle: 'italic' }}>
@@ -15,6 +17,7 @@ const WaitingForDriver: StatelessComponent = () => (
       content="Cancel Ride"
       labelPosition="right"
       style={{ marginTop: '1.5rem', width: '70%' }}
+      onClick={() => deleteRide()}
     />
   </div>
 );
