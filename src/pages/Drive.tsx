@@ -15,6 +15,7 @@ import {
 import getWaitingRides from '../api/read/getWaitingRides';
 import RideDetails from '../typings/RideDetails';
 import ActiveDrive from '../components/driver/ActiveDrive';
+import socket from '../api/socket';
 
 class Drive extends Component<
   {
@@ -35,8 +36,9 @@ class Drive extends Component<
     this.props.setWaitingRides(userRides);
   };
 
-  componentDidMount() {
-    this.setWaitingRides();
+  async componentDidMount() {
+    await this.setWaitingRides();
+    socket.on('rideslist_changed', async () => await this.setWaitingRides());
   }
 
   render() {

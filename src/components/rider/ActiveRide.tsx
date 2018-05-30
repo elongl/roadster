@@ -7,12 +7,13 @@ import {
 } from '../../actions/activeRide';
 import { connect } from 'react-redux';
 import AppState from '../../typings/AppState';
-import UserDetails from '../../typings/UserDetails';
 import DriverFound from './DriverFound';
 import getUser from '../../api/read/getUser';
 import confirmRide from '../../api/update/confirmRide';
 import LiveRide from './LiveRide';
 import completeRide from '../../api/update/completeRide';
+import socket from '../../api/socket';
+import getRide from '../../api/read/getRide';
 
 interface ActiveRideProps {
   removeActiveRide: typeof removeActiveRideAction;
@@ -20,9 +21,6 @@ interface ActiveRideProps {
   activeRide: AppState['activeRide'];
 }
 
-interface ActiveRideState {
-  driver: UserDetails | null;
-}
 class ActiveRide extends Component<ActiveRideProps> {
   state = { driver: null };
 
@@ -53,12 +51,18 @@ class ActiveRide extends Component<ActiveRideProps> {
     }
   };
 
-  componentDidMount() {
-    this.updateDriver();
-  }
-
-  componentDidUpdate(prevProps: ActiveRideProps, prevState: ActiveRideState) {
-    if (prevState.driver === null) {
+  async componentDidMount() {
+    const { setActiveRide, activeRide } = this.props;
+    if (activeRide && !activeRide.driverId) {
+      socket.once(`matchdriver/${activeRide.id}`, async () => {
+        const activeRideWithDriver = await getRide(activeRide.id);
+        setActiveRide(activeRideWithDriver);
+        this.updateDriver();
+        socket.once(`unmatchdriver/${activeRide.id}`, async () => {
+          setActiveRide({ ...activeRide, driverId: null, status: 'waiting' });
+        });
+      });
+    } else {
       this.updateDriver();
     }
   }

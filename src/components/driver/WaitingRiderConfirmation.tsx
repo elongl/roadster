@@ -4,9 +4,10 @@ import { Image, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import UserDetails from '../../typings/UserDetails';
 import MessageLoader from '../common/MessageLoader';
-const WaitingRiderConfirmation: StatelessComponent<{ rider: UserDetails | null }> = ({
-  rider
-}) =>
+const WaitingRiderConfirmation: StatelessComponent<{
+  rider: UserDetails | null;
+  unmatchDriver: () => void;
+}> = ({ rider, unmatchDriver }) =>
   !rider ? (
     <MessageLoader>Loading your pick up.</MessageLoader>
   ) : (
@@ -38,8 +39,8 @@ const WaitingRiderConfirmation: StatelessComponent<{ rider: UserDetails | null }
         style={{ width: '60%', marginTop: '0.5rem' }}
         icon="cancel"
         content="Nevermind, cancel."
+        onClick={unmatchDriver}
       />
-      {/* Add Unmatch Method.*/}
     </div>
   );
 
