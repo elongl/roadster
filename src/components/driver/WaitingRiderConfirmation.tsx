@@ -12,12 +12,7 @@ const WaitingRiderConfirmation: StatelessComponent<{
     <MessageLoader>Loading your pick up.</MessageLoader>
   ) : (
     <div style={{ ...viewportCenter, color: 'white', textAlign: 'center' }}>
-      <Image
-        rounded
-        size="small"
-        src={rider.avatar.substring(0, rider.avatar.indexOf('?')) + '?sz=200'}
-        style={{ height: 150 }}
-      />
+      <Image rounded size="small" src={rider.avatar} style={{ height: 150 }} />
       <strong style={{ fontStyle: 'italic', fontSize: '1.5rem', margin: '1.5rem' }}>
         Waiting for {rider.displayName}'s confirmation.
       </strong>

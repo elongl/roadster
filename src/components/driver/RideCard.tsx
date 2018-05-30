@@ -16,9 +16,7 @@ const RideCard: StatelessComponent<RideCard> = ({ userRide, className }) => (
         avatar
         floated="right"
         size="mini"
-        src={
-          userRide.user.avatar.substring(0, userRide.user.avatar.indexOf('?')) + '?sz=200'
-        }
+        src={userRide.user.avatar}
         style={{ margin: 0, width: '3.5rem', height: '3.5rem' }}
       />
       <Card.Header>{userRide.user.displayName}</Card.Header>

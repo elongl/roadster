@@ -14,12 +14,7 @@ const DriverFound: StatelessComponent<{
   }
   return (
     <div style={{ ...viewportCenter, color: 'white', textAlign: 'center' }}>
-      <Image
-        rounded
-        size="small"
-        src={driver.avatar.substring(0, driver.avatar.indexOf('?')) + '?sz=200'}
-        style={{ height: 150 }}
-      />
+      <Image rounded size="small" src={driver.avatar} style={{ height: 150 }} />
       <strong style={{ fontStyle: 'italic', fontSize: '1.5rem', margin: '1.5rem' }}>
         {driver.displayName} wants to pick you up!
       </strong>

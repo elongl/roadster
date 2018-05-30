@@ -9,12 +9,7 @@ const Profile: StatelessComponent<{
   user: UserDetails;
 }> = props => (
   <div style={{ ...viewportCenter, color: 'white' }}>
-    <Image
-      circular
-      size="small"
-      style={{ height: 150 }}
-      src={props.user.avatar.substring(0, props.user.avatar.indexOf('?')) + '?sz=200'}
-    />
+    <Image circular size="small" style={{ height: 150 }} src={props.user.avatar} />
     <h2>Display Name</h2>
     <span>{props.user.displayName}</span>
     <h2>Phone number</h2>
