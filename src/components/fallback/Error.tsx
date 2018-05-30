@@ -14,7 +14,11 @@ const Error: StatelessComponent<ErrorProps> = ({ header, content }) => (
       color: 'white'
     }}
   >
-    <Image src="/assets/images/cloud-error.svg" size="small" />
+    <Image
+      src="/assets/images/cloud-error.svg"
+      size="small"
+      style={{ height: '12.4rem' }}
+    />
     <h2>{header}</h2>
     <h3 style={{ width: '60%', fontWeight: 100, fontStyle: 'italic' }}>{content}</h3>
     <Button
