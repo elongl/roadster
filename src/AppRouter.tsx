@@ -14,6 +14,7 @@ import SidebarMenu from './components/common/SidebarMenu';
 import Logout from './components/authentication/Logout';
 import { connect } from 'react-redux';
 import AppState from './typings/AppState';
+import MessageLoader from './components/common/MessageLoader';
 
 class AppRouter extends Component<
   RouteComponentProps<{}> & { isActiveRide: boolean; isActiveDrive: boolean }
@@ -33,7 +34,7 @@ class AppRouter extends Component<
 
   render() {
     if (this.state.loading) {
-      return null;
+      return <MessageLoader>Please Wait.</MessageLoader>;
     }
     return (
       <>

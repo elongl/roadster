@@ -3,7 +3,8 @@ import RideDetails from '../../typings/RideDetails';
 
 const getUserDrive = async () => {
   try {
-    return (await request.get('/userdrive')).data;
+    const { data: userDrive } = await request.get('/userdrive');
+    return userDrive;
   } catch (ex) {
     return null;
   }

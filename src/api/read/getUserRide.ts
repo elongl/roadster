@@ -3,7 +3,8 @@ import RideDetails from '../../typings/RideDetails';
 
 const getUserRide = async (userId: number) => {
   try {
-    return (await request.get(`/userride/${userId}`)).data;
+    const { data: userRide } = await request.get(`/userride/${userId}`);
+    return userRide;
   } catch (ex) {
     return null;
   }
