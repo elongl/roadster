@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter, RouteComponentProps } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
@@ -12,12 +12,22 @@ import DriverRoute from './components/routing/DriverRoute';
 import Support from './pages/Support';
 import SidebarMenu from './components/common/SidebarMenu';
 import Logout from './components/authentication/Logout';
+import { connect } from 'react-redux';
+import AppState from './typings/AppState';
 
-class AppRouter extends Component {
+class AppRouter extends Component<
+  RouteComponentProps<{}> & { isActiveRide: boolean; isActiveDrive: boolean }
+> {
   state = { loading: true };
 
   async componentDidMount() {
     await appStart();
+    const { isActiveRide, isActiveDrive, history } = this.props;
+    if (isActiveRide) {
+      history.push('/ride');
+    } else if (isActiveDrive) {
+      history.push('/drive');
+    }
     this.setState({ loading: false });
   }
 
@@ -42,4 +52,8 @@ class AppRouter extends Component {
     );
   }
 }
-export default AppRouter;
+const mapStateToProps = (state: AppState) => ({
+  isActiveRide: Boolean(state.activeRide),
+  isActiveDrive: Boolean(state.activeDrive)
+});
+export default withRouter(connect(mapStateToProps)(AppRouter));

@@ -12,7 +12,7 @@ const Logout: StatelessComponent = () => (
     </h3>
     <div style={{ display: 'flex' }}>
       <Button
-        negative
+        color="google plus"
         style={{ width: '50%', margin: '0.5rem', ...center }}
         onClick={() => logout().then(() => location.reload())}
       >

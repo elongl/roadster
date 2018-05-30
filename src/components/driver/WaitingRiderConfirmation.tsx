@@ -1,45 +1,35 @@
 import React, { StatelessComponent } from 'react';
+import viewportCenter from '../../styles/viewportCenter';
+import { Image, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import UserDetails from '../../typings/UserDetails';
 import MessageLoader from '../common/MessageLoader';
-import { Image, Button } from 'semantic-ui-react';
-import viewportCenter from '../../styles/viewportCenter';
-import { Link } from 'react-router-dom';
-const DriverFound: StatelessComponent<{
-  driver: UserDetails | null;
-  deleteRide: () => void;
-}> = ({ driver, deleteRide }) => {
-  if (!driver) {
-    return <MessageLoader>Loading your Driver.</MessageLoader>;
-  }
-  return (
+const WaitingRiderConfirmation: StatelessComponent<{ rider: UserDetails | null }> = ({
+  rider
+}) =>
+  !rider ? (
+    <MessageLoader>Loading your pick up.</MessageLoader>
+  ) : (
     <div style={{ ...viewportCenter, color: 'white', textAlign: 'center' }}>
       <Image
         rounded
         size="small"
-        src={driver.avatar.substring(0, driver.avatar.indexOf('?')) + '?sz=200'}
+        src={rider.avatar.substring(0, rider.avatar.indexOf('?')) + '?sz=200'}
         style={{ height: 150 }}
       />
       <strong style={{ fontStyle: 'italic', fontSize: '1.5rem', margin: '1.5rem' }}>
-        {driver.displayName} wants to pick you up!
+        Waiting for {rider.displayName}'s confirmation.
       </strong>
       <p style={{ fontSize: '1.25rem' }}>
-        To contact {driver.displayName}:
+        To contact {rider.displayName}:
         <a
           style={{ color: 'lightblue', display: 'block' }}
-          href={`tel: ${driver.phoneNumber}`}
+          href={`tel: ${rider.phoneNumber}`}
         >
-          {driver.phoneNumber}.
+          {rider.phoneNumber}.
         </a>
         <span style={{ marginTop: '1rem' }}>(Click To Call)</span>
       </p>
-
-      <Button
-        color="green"
-        size="large"
-        style={{ width: '60%', marginTop: '1rem' }}
-        icon="marker"
-        content="Pick me up!"
-      />
       <Button
         as={Link}
         color="google plus"
@@ -48,10 +38,9 @@ const DriverFound: StatelessComponent<{
         style={{ width: '60%', marginTop: '0.5rem' }}
         icon="cancel"
         content="Nevermind, cancel."
-        onClick={deleteRide}
       />
+      {/* Add Unmatch Method.*/}
     </div>
   );
-};
 
-export default DriverFound;
+export default WaitingRiderConfirmation;

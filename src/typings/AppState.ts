@@ -8,5 +8,6 @@ interface AppState {
   fallbackError: { error: Error; type: string } | null;
   userLocation: string | null;
   activeRide: RideDetails | null;
+  activeDrive: RideDetails | null;
 }
 export default AppState;

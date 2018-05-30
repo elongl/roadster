@@ -14,10 +14,12 @@ import {
 } from 'react-router-dom';
 import getWaitingRides from '../api/read/getWaitingRides';
 import RideDetails from '../typings/RideDetails';
+import ActiveDrive from '../components/driver/ActiveDrive';
 
 class Drive extends Component<
   {
     isActiveRide: boolean;
+    isActiveDrive: boolean;
     waitingRides: AppState['waitingRides'];
     setWaitingRides: typeof setWaitingRides;
   } & RouteComponentProps<{}>
@@ -38,8 +40,12 @@ class Drive extends Component<
   }
 
   render() {
-    if (this.props.isActiveRide) {
+    const { isActiveRide, isActiveDrive } = this.props;
+    if (isActiveRide) {
       return <Redirect to="/ride" />;
+    }
+    if (isActiveDrive) {
+      return <ActiveDrive />;
     }
     return (
       <Switch>
@@ -52,6 +58,7 @@ class Drive extends Component<
 
 const mapStateToProps = (state: AppState) => ({
   waitingRides: state.waitingRides,
-  isActiveRide: Boolean(state.activeRide)
+  isActiveRide: Boolean(state.activeRide),
+  isActiveDrive: Boolean(state.activeDrive)
 });
 export default withRouter(connect(mapStateToProps, { setWaitingRides })(Drive));

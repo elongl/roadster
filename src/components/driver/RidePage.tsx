@@ -10,13 +10,16 @@ import { clientError as clientErrorAction } from '../../actions/fallbackError';
 import { setUserLocation as setUserLocationAction } from '../../actions/userLocation';
 import getUserLocation from '../../utils/getUserLocation';
 import matchDriver from '../../api/update/matchDriver';
+import { setActiveDrive as setActiveDriveAction } from '../../actions/activeDrive';
 
 class RidePage extends Component<
   {
     clientError: typeof clientErrorAction;
     setUserLocation: typeof setUserLocationAction;
+    setActiveDrive: typeof setActiveDriveAction;
     userLocation: AppState['userLocation'];
     waitingRides: AppState['waitingRides'];
+    userId: number;
   } & RouteComponentProps<{ rideId: number }>
 > {
   componentDidMount() {
@@ -27,7 +30,14 @@ class RidePage extends Component<
   }
 
   render() {
-    const { waitingRides, userLocation } = this.props;
+    const {
+      waitingRides,
+      userLocation,
+      match,
+      history,
+      setActiveDrive,
+      userId
+    } = this.props;
     if (!waitingRides) {
       return <Loader />;
     }
@@ -38,6 +48,7 @@ class RidePage extends Component<
       return <Redirect to="/drive" />;
     }
     const { user, ride } = thisRide;
+
     return (
       <>
         <SidebarTitle title={user.displayName} />
@@ -74,7 +85,11 @@ class RidePage extends Component<
                 <Button
                   style={{ width: '50%' }}
                   color="orange"
-                  onClick={() => matchDriver(this.props.match.params.rideId)}
+                  onClick={() => {
+                    matchDriver(match.params.rideId).then(() =>
+                      setActiveDrive({ ...ride, driverId: userId, status: 'confirming' })
+                    );
+                  }}
                 >
                   Let's Roll!
                 </Button>
@@ -82,7 +97,7 @@ class RidePage extends Component<
                 <Button
                   secondary
                   style={{ width: '50%' }}
-                  onClick={() => this.props.history.push('/drive')}
+                  onClick={() => history.push('/drive')}
                 >
                   Skip
                 </Button>
@@ -104,10 +119,12 @@ class RidePage extends Component<
 export default connect(
   (state: AppState) => ({
     userLocation: state.userLocation,
-    waitingRides: state.waitingRides
+    waitingRides: state.waitingRides,
+    userId: state.user && state.user.id
   }),
   {
     clientError: clientErrorAction,
-    setUserLocation: setUserLocationAction
+    setUserLocation: setUserLocationAction,
+    setActiveDrive: setActiveDriveAction
   }
 )(RidePage);
