@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import WaitingForDriver from './WaitingForDriver';
 import deleteRide from '../../api/delete/deleteRide';
-import { removeActiveRide } from '../../actions/activeRide';
+import {
+  removeActiveRide as removeActiveRideAction,
+  setActiveRide as setActiveRideAction
+} from '../../actions/activeRide';
 import { connect } from 'react-redux';
 import AppState from '../../typings/AppState';
 import UserDetails from '../../typings/UserDetails';
 import DriverFound from './DriverFound';
 import getUser from '../../api/read/getUser';
+import confirmRide from '../../api/update/confirmRide';
+import LiveRide from './LiveRide';
+import completeRide from '../../api/update/completeRide';
 
 interface ActiveRideProps {
-  removeActiveRide: typeof removeActiveRide;
+  removeActiveRide: typeof removeActiveRideAction;
+  setActiveRide: typeof setActiveRideAction;
   activeRide: AppState['activeRide'];
 }
 
@@ -21,6 +28,23 @@ class ActiveRide extends Component<ActiveRideProps> {
 
   deleteRide = () => {
     deleteRide().then(() => this.props.removeActiveRide());
+  };
+
+  confirmRide = () => {
+    const { activeRide, setActiveRide } = this.props;
+    console.log(activeRide);
+    confirmRide().then(() => {
+      if (activeRide) {
+        setActiveRide({ ...activeRide, status: 'in progress' });
+      }
+    });
+  };
+
+  completeRide = () => {
+    const { removeActiveRide } = this.props;
+    completeRide().then(() => {
+      removeActiveRide();
+    });
   };
 
   updateDriver = () => {
@@ -42,14 +66,32 @@ class ActiveRide extends Component<ActiveRideProps> {
 
   render() {
     const { activeRide } = this.props;
-    return activeRide && activeRide.driverId ? (
-      <DriverFound driver={this.state.driver} deleteRide={this.deleteRide} />
-    ) : (
-      <WaitingForDriver deleteRide={this.deleteRide} />
-    );
+    if (activeRide) {
+      if (activeRide.status === 'in progress') {
+        return (
+          <LiveRide
+            completeRide={this.completeRide}
+            driver={this.state.driver}
+            ride={activeRide}
+          />
+        );
+      }
+      if (activeRide.driverId) {
+        return (
+          <DriverFound
+            driver={this.state.driver}
+            deleteRide={this.deleteRide}
+            confirmRide={this.confirmRide}
+          />
+        );
+      }
+      return <WaitingForDriver deleteRide={this.deleteRide} />;
+    }
+    return null;
   }
 }
 
 export default connect((state: AppState) => ({ activeRide: state.activeRide }), {
-  removeActiveRide
+  removeActiveRide: removeActiveRideAction,
+  setActiveRide: setActiveRideAction
 })(ActiveRide);

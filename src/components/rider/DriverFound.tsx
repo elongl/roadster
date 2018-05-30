@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 const DriverFound: StatelessComponent<{
   driver: UserDetails | null;
   deleteRide: () => void;
-}> = ({ driver, deleteRide }) => {
+  confirmRide: () => void;
+}> = ({ driver, deleteRide, confirmRide }) => {
   if (!driver) {
     return <MessageLoader>Loading your Driver.</MessageLoader>;
   }
@@ -32,14 +33,14 @@ const DriverFound: StatelessComponent<{
         </a>
         <span style={{ marginTop: '1rem' }}>(Click To Call)</span>
       </p>
-      
-// marker / map pin / map icon.
+
       <Button
         color="green"
         size="large"
         style={{ width: '60%', marginTop: '1rem' }}
-        icon="marker"
+        icon="map"
         content="Pick me up!"
+        onClick={() => confirmRide()}
       />
       <Button
         as={Link}

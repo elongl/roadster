@@ -26,7 +26,7 @@ const appStart = async () => {
         store.dispatch(setActiveDrive(activeDrive));
         if (activeDrive.status === 'confirming') {
           socket.on(`confirm/${activeDrive.id}`, async () => {
-            store.dispatch(setActiveRide({ ...activeDrive, status: 'in progress' }));
+            store.dispatch(setActiveDrive({ ...activeDrive, status: 'in progress' }));
           });
         }
       }

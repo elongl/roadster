@@ -23,9 +23,10 @@ const LinkButton: StatelessComponent<LinkButton> = props => (
 const Home: StatelessComponent<{
   isDriver: UserDetails['isDriver'];
   isActiveRide: boolean;
-}> = ({ isDriver, isActiveRide }) => (
+  isActiveDrive: boolean;
+}> = ({ isDriver, isActiveRide, isActiveDrive }) => (
   <div style={viewportCenter}>
-    <LinkButton to="/ride" content="Get a Ride" icon="car" />
+    <LinkButton to="/ride" content="Get a Ride" icon="car" disabled={isActiveDrive} />
     <Divider horizontal style={{ color: 'white' }}>
       OR
     </Divider>
@@ -40,7 +41,8 @@ const Home: StatelessComponent<{
 
 export default connect((state: AppState) => ({
   isDriver: state.user && state.user.isDriver,
-  isActiveRide: Boolean(state.activeRide)
+  isActiveRide: Boolean(state.activeRide),
+  isActiveDrive: Boolean(state.activeDrive)
 }))(Home);
 
 interface LinkButton {
