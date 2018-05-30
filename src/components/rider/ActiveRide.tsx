@@ -32,7 +32,6 @@ class ActiveRide extends Component<ActiveRideProps> {
 
   confirmRide = () => {
     const { activeRide, setActiveRide } = this.props;
-    console.log(activeRide);
     confirmRide().then(() => {
       if (activeRide) {
         setActiveRide({ ...activeRide, status: 'in progress' });

@@ -23,7 +23,7 @@ const LiveRide: StatelessComponent<{
       }}
     >
       <h2 style={{ margin: '1rem' }}>{driver.displayName} is on his way towards you!</h2>
-      <p style={{ width: '85%' }}>
+      <div style={{ width: '85%' }}>
         <h3>
           He will be waiting for you at{' '}
           <span style={{ fontStyle: 'italic' }}>{ride.origin}</span> and will take you to{' '}
@@ -32,7 +32,7 @@ const LiveRide: StatelessComponent<{
             🏎️ Thank you for choosing Roadster 🚗
           </span>
         </h3>
-      </p>
+      </div>
       <Button
         positive
         size="big"
