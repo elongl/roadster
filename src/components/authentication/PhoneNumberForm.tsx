@@ -14,9 +14,9 @@ const PhoneNumberForm: StatelessComponent<{
         <input
           required
           type="tel"
-          pattern="05\d-?\d{7}"
+          pattern="5\d-?\d{7}"
           title="Israeli phone number"
-          placeholder="058-7070765"
+          placeholder="58-7070765"
           value={props.phoneNumber}
           onChange={event => props.changePhoneNumber(event.currentTarget.value)}
           style={{
