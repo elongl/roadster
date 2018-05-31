@@ -4,4 +4,4 @@ const matchDriver = async (rideId: number) => {
   await request.patch('/matchdriver', { rideId });
 };
 
-export default matchDriver as (rideId: number) => Promise<void>;
+export default matchDriver;

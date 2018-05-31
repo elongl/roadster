@@ -4,4 +4,4 @@ const logout = async () => {
   await request.get('/auth/logout');
 };
 
-export default logout as () => Promise<void>;
+export default logout;
