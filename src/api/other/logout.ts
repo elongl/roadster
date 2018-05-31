@@ -1,5 +1,7 @@
 import request from '../request';
 
-const logout = async () => await request.get('/auth/logout');
+const logout = async () => {
+  await request.get('/auth/logout');
+};
 
-export default logout;
+export default logout as () => Promise<void>;

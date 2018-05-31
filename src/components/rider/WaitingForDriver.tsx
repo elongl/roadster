@@ -20,7 +20,7 @@ const WaitingForDriver: StatelessComponent<{ deleteRide: () => void }> = ({
       as={Link}
       to="/"
       style={{ marginTop: '1.5rem', width: '70%' }}
-      onClick={() => deleteRide()}
+      onClick={deleteRide}
     />
   </div>
 );

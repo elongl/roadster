@@ -4,20 +4,13 @@ import { Segment, Button } from 'semantic-ui-react';
 import AppState from '../../typings/AppState';
 import MessageLoader from '../common/MessageLoader';
 
-interface RideConfirmation {
+const RideConfirmation: StatelessComponent<{
   origin: { value: string; myLocation: boolean };
   destination: { value: string };
   userLocation: AppState['userLocation'];
   gotoStage: (stage: number) => void;
   pushStage: () => void;
-}
-const RideConfirmation: StatelessComponent<RideConfirmation> = ({
-  origin,
-  destination,
-  userLocation,
-  gotoStage,
-  pushStage
-}) => (
+}> = ({ origin, destination, userLocation, gotoStage, pushStage }) => (
   <>
     <Segment
       raised
@@ -51,7 +44,7 @@ const RideConfirmation: StatelessComponent<RideConfirmation> = ({
           origin={origin.myLocation && userLocation ? userLocation : origin.value}
         />
         <Button.Group size="large" style={{ width: '85%', margin: '1rem' }}>
-          <Button primary style={{ width: '50%' }} onClick={() => pushStage()}>
+          <Button primary style={{ width: '50%' }} onClick={pushStage}>
             Go!
           </Button>
           <Button.Or style={{ textTransform: 'uppercase' }} />

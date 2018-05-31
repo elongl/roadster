@@ -12,13 +12,14 @@ import RideConfirmation from '../../components/rider/RideConfirmation';
 import MessageLoader from '../../components/common/MessageLoader';
 import getUserLocation from '../../utils/getUserLocation';
 import SidebarTitle from '../../components/common/SidebarTitle';
+import UserDetails from '../../typings/UserDetails';
 
 class RideCreation extends Component<{
   setUserLocation: typeof setUserLocationAction;
   setActiveRide: typeof setActiveRideAction;
   clientError: typeof clientErrorAction;
   userLocation: AppState['userLocation'];
-  user: AppState['user'];
+  user: UserDetails;
 }> {
   state = {
     stage: 1,
@@ -28,30 +29,18 @@ class RideCreation extends Component<{
 
   textChange = (stateName: string, value: string) =>
     this.setState({
-      [stateName]: {
-        ...this.state[stateName],
-        value
-      }
+      [stateName]: { ...this.state[stateName], value }
     });
 
   myLocationToggle = () => {
     const { origin } = this.state;
-    this.setState({
-      origin: { ...origin, myLocation: !origin.myLocation }
-    });
+    this.setState({ origin: { ...origin, myLocation: !origin.myLocation } });
   };
 
   placeChange = (stateName: string, ref: StandaloneSearchBox | null) => {
-    const placeName =
-      ref && ref.getPlaces()[0]
-        ? ref.getPlaces()[0].formatted_address
-        : this.state[stateName].value;
-
-    this.setState({
-      [stateName]: {
-        value: placeName
-      }
-    });
+    const place = ref && ref.getPlaces()[0];
+    const placeName = place ? place.formatted_address : this.state[stateName].value;
+    this.setState({ [stateName]: { ...this.state[stateName], value: placeName } });
   };
 
   pushStage = () => this.setState({ stage: this.state.stage + 1 });
@@ -79,16 +68,14 @@ class RideCreation extends Component<{
           origin: chosenOrigin,
           destination: destination.value
         });
-        if (user) {
-          setActiveRide({
-            id,
-            origin: chosenOrigin,
-            destination: destination.value,
-            riderId: user.id,
-            driverId: null,
-            status: 'waiting'
-          });
-        }
+        setActiveRide({
+          id,
+          origin: chosenOrigin,
+          destination: destination.value,
+          riderId: user.id,
+          driverId: null,
+          status: 'waiting'
+        });
       } catch (ex) {
         clientError(new Error('Failed to create new ride.'));
       }
@@ -106,10 +93,10 @@ class RideCreation extends Component<{
             <PickLocations
               origin={origin}
               destination={destination}
-              textChange={(state, text) => this.textChange(state, text)}
-              placeChange={(state, text) => this.placeChange(state, text)}
-              myLocationToggle={() => this.myLocationToggle()}
-              pushStage={() => this.pushStage()}
+              textChange={this.textChange}
+              placeChange={this.placeChange}
+              myLocationToggle={this.myLocationToggle}
+              pushStage={this.pushStage}
             />
           )}
           {stage === 2 && (

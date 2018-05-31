@@ -36,7 +36,7 @@ const PickLocations: StatelessComponent<PickLocations> = ({
         label="My Location"
         style={{ marginBottom: '1rem', zIndex: 0 }}
         checked={origin.myLocation}
-        onChange={() => myLocationToggle()}
+        onChange={myLocationToggle}
       />
       {!origin.myLocation && (
         <PlaceSearchBox

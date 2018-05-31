@@ -35,7 +35,7 @@ const DriverFound: StatelessComponent<{
         style={{ width: '60%', marginTop: '1rem' }}
         icon="map"
         content="Pick me up!"
-        onClick={() => confirmRide()}
+        onClick={confirmRide}
       />
       <Button
         as={Link}

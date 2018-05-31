@@ -42,7 +42,7 @@ const LiveRide: StatelessComponent<{
         as={Link}
         to="/"
         style={{ marginTop: '1.5rem', width: '70%' }}
-        onClick={() => completeRide()}
+        onClick={completeRide}
       />
     </div>
   );

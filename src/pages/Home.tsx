@@ -4,9 +4,13 @@ import viewportCenter from '../styles/viewportCenter';
 import { Link } from 'react-router-dom';
 import AppState from '../typings/AppState';
 import { connect } from 'react-redux';
-import UserDetails from '../typings/UserDetails';
 
-const LinkButton: StatelessComponent<LinkButton> = props => (
+const LinkButton: StatelessComponent<{
+  to: string;
+  content: string;
+  icon: SemanticICONS;
+  disabled?: boolean;
+}> = props => (
   <Button
     inverted
     size="huge"
@@ -21,7 +25,7 @@ const LinkButton: StatelessComponent<LinkButton> = props => (
 );
 
 const Home: StatelessComponent<{
-  isDriver: UserDetails['isDriver'];
+  isDriver: boolean;
   isActiveRide: boolean;
   isActiveDrive: boolean;
 }> = ({ isDriver, isActiveRide, isActiveDrive }) => (
@@ -44,10 +48,3 @@ export default connect((state: AppState) => ({
   isActiveRide: Boolean(state.activeRide),
   isActiveDrive: Boolean(state.activeDrive)
 }))(Home);
-
-interface LinkButton {
-  to: string;
-  content: string;
-  icon: SemanticICONS;
-  disabled?: boolean;
-}

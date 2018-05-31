@@ -3,7 +3,7 @@ import { Button, Icon } from 'semantic-ui-react';
 
 const IsDriverForm: StatelessComponent<{
   changeIsDriver: (isDriver: boolean) => void;
-}> = props => (
+}> = ({ changeIsDriver }) => (
   <>
     <h3 style={{ color: 'white' }}>
       Would you like to list yourself as a driver?
@@ -20,12 +20,12 @@ const IsDriverForm: StatelessComponent<{
       </span>
     </h3>
     <Button.Group size="huge">
-      <Button primary onClick={() => props.changeIsDriver(true)}>
+      <Button primary onClick={() => changeIsDriver(true)}>
         <Icon name="checkmark" />
         Yes
       </Button>
       <Button.Or />
-      <Button secondary onClick={() => props.changeIsDriver(false)}>
+      <Button secondary onClick={() => changeIsDriver(false)}>
         <Icon name="remove" />
         No
       </Button>

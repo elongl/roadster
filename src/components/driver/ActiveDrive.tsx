@@ -7,14 +7,14 @@ import getUser from '../../api/read/getUser';
 import socket from '../../api/socket';
 import completeRide from '../../api/update/completeRide';
 import unmatchDriver from '../../api/update/unmatchDriver';
-
+import RideDetails from '../../typings/RideDetails';
 import {
   setActiveDrive as setActiveDriveAction,
   removeActiveDrive as removeActiveDriveAction
 } from '../../actions/activeDrive';
 
 class ActiveDrive extends Component<{
-  activeDrive: AppState['activeDrive'];
+  activeDrive: RideDetails;
   setActiveDrive: typeof setActiveDriveAction;
   removeActiveDrive: typeof removeActiveDriveAction;
 }> {
@@ -22,29 +22,23 @@ class ActiveDrive extends Component<{
 
   componentDidMount() {
     const { activeDrive, setActiveDrive, removeActiveDrive } = this.props;
-    if (activeDrive) {
-      getUser(activeDrive.riderId).then(rider => this.setState({ rider }));
-      if (activeDrive.status === 'confirming') {
-        socket.once(`confirm/${activeDrive.id}`, () => {
-          setActiveDrive({ ...activeDrive, status: 'in progress' });
-        });
-        socket.once(`cancel/${activeDrive.id}`, () => {
-          removeActiveDrive();
-        });
-      }
+    getUser(activeDrive.riderId).then(rider => this.setState({ rider }));
+    if (activeDrive.status === 'confirming') {
+      socket.once(`confirm/${activeDrive.id}`, () => {
+        setActiveDrive({ ...activeDrive, status: 'in progress' });
+      });
+      socket.once(`cancel/${activeDrive.id}`, removeActiveDrive);
     }
   }
 
   unmatchDriver = () => {
     const { removeActiveDrive } = this.props;
-    unmatchDriver().then(() => removeActiveDrive());
+    unmatchDriver().then(removeActiveDrive);
   };
 
   completeRide = () => {
     const { removeActiveDrive } = this.props;
-    completeRide().then(() => {
-      removeActiveDrive();
-    });
+    completeRide().then(removeActiveDrive);
   };
 
   render() {

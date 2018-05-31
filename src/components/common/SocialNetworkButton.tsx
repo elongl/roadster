@@ -13,9 +13,9 @@ const SocialNetworkButton: StatelessComponent<Props> = props => (
     size="big"
     color={props.colorAndIcon}
     content={`Sign in with ${props.name}`}
-    onClick={() => {
-      location.replace(process.env.REACT_APP_SERVER_URL + '/auth/' + props.name);
-    }}
+    onClick={() =>
+      location.replace(process.env.REACT_APP_SERVER_URL + '/auth/' + props.name)
+    }
   />
 );
 export default SocialNetworkButton;

@@ -21,7 +21,6 @@ class Drive extends Component<
   {
     isActiveRide: boolean;
     isActiveDrive: boolean;
-    waitingRides: AppState['waitingRides'];
     setWaitingRides: typeof setWaitingRides;
   } & RouteComponentProps<{}>
 > {
@@ -38,7 +37,7 @@ class Drive extends Component<
 
   async componentDidMount() {
     await this.setWaitingRides();
-    socket.on('rideslist_changed', async () => await this.setWaitingRides());
+    socket.on('rideslist_changed', this.setWaitingRides);
   }
 
   render() {
@@ -59,7 +58,6 @@ class Drive extends Component<
 }
 
 const mapStateToProps = (state: AppState) => ({
-  waitingRides: state.waitingRides,
   isActiveRide: Boolean(state.activeRide),
   isActiveDrive: Boolean(state.activeDrive)
 });

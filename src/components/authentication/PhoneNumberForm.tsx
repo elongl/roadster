@@ -6,8 +6,8 @@ const PhoneNumberForm: StatelessComponent<{
   phoneNumber: string;
   pushStage: () => void;
   changePhoneNumber: (phoneNumber: string) => void;
-}> = props => (
-  <Form style={viewportCenter} onSubmit={() => props.pushStage()}>
+}> = ({ pushStage, changePhoneNumber, phoneNumber }) => (
+  <Form style={viewportCenter} onSubmit={pushStage}>
     <h3 style={{ color: 'white' }}>Please enter your phone number.</h3>
     <Input
       input={
@@ -17,8 +17,8 @@ const PhoneNumberForm: StatelessComponent<{
           pattern="5\d-?\d{7}"
           title="Israeli phone number"
           placeholder="58-7070765"
-          value={props.phoneNumber}
-          onChange={event => props.changePhoneNumber(event.currentTarget.value)}
+          value={phoneNumber}
+          onChange={event => changePhoneNumber(event.currentTarget.value)}
           style={{
             width: '75%',
             fontSize: '1.2rem',

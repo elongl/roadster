@@ -7,15 +7,15 @@ import AppState from '../typings/AppState';
 
 const Profile: StatelessComponent<{
   user: UserDetails;
-}> = props => (
+}> = ({ user }) => (
   <div style={{ ...viewportCenter, color: 'white' }}>
-    <Image circular size="small" style={{ height: 150 }} src={props.user.avatar} />
+    <Image circular size="small" style={{ height: 150 }} src={user.avatar} />
     <h2>Display Name</h2>
-    <span>{props.user.displayName}</span>
+    <span>{user.displayName}</span>
     <h2>Phone number</h2>
-    <span>{props.user.phoneNumber || 'Unknown'}</span>
+    <span>{user.phoneNumber || 'Unknown'}</span>
     <h2>Driver</h2>
-    <span>{props.user.isDriver ? 'Yes' : 'No'}</span>
+    <span>{user.isDriver ? 'Yes' : 'No'}</span>
   </div>
 );
 export default connect((state: AppState) => ({ user: state.user }))(Profile);
