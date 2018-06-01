@@ -47,11 +47,11 @@ class ActiveRide extends Component<{
   async componentDidMount() {
     const { setActiveRide, activeRide } = this.props;
     if (activeRide && !activeRide.driverId) {
-      socket.once(`matchdriver/${activeRide.id}`, async () => {
+      socket.on(`matchdriver/${activeRide.id}`, async () => {
         const activeRideWithDriver = await getRide(activeRide.id);
         setActiveRide(activeRideWithDriver);
         this.updateDriver();
-        socket.once(`unmatchdriver/${activeRide.id}`, async () => {
+        socket.on(`unmatchdriver/${activeRide.id}`, async () => {
           setActiveRide({ ...activeRide, driverId: null, status: 'waiting' });
         });
       });

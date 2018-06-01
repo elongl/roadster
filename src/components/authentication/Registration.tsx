@@ -19,7 +19,7 @@ class Registration extends Component<
   changeIsDriver = (isDriver: boolean) => this.setState({ isDriver }, this.updateUser);
 
   updateUser = () => {
-    const phoneNumber = this.state.phoneNumber.replace('-', '');
+    const phoneNumber = '0' + this.state.phoneNumber.replace('-', '');
     const { isDriver } = this.state;
     updateUser({ phoneNumber, isDriver }).then(this.pushStage);
     setTimeout(() => location.replace('/'), 2750);
