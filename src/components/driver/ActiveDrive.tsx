@@ -25,7 +25,7 @@ class ActiveDrive extends Component<{
     getUser(activeDrive.riderId).then(rider => this.setState({ rider }));
     if (activeDrive.status === 'confirming') {
       socket.once(`confirm/${activeDrive.id}`, () => {
-        setActiveDrive({ ...activeDrive, status: 'in progress' });
+        setActiveDrive({ ...activeDrive, status: 'live' });
       });
       socket.once(`cancel/${activeDrive.id}`, removeActiveDrive);
     }

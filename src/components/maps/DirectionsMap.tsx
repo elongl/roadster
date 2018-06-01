@@ -50,7 +50,10 @@ class DirectionsMap extends Component<{
     const { directions } = this.state;
 
     return (
-      <GoogleMap defaultZoom={17} options={{ mapTypeControl: false }}>
+      <GoogleMap
+        defaultZoom={17}
+        options={{ mapTypeControl: false, gestureHandling: 'cooperative' }}
+      >
         <DirectionsRenderer directions={this.state.directions} />
         {directions &&
           directions.routes[0].legs.map(leg => (

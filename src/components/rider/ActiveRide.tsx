@@ -28,7 +28,7 @@ class ActiveRide extends Component<{
   confirmRide = () => {
     const { activeRide, setActiveRide } = this.props;
     confirmRide().then(() => {
-      setActiveRide({ ...activeRide, status: 'in progress' });
+      setActiveRide({ ...activeRide, status: 'live' });
     });
   };
 
@@ -62,7 +62,7 @@ class ActiveRide extends Component<{
 
   render() {
     const { activeRide } = this.props;
-    if (activeRide.status === 'in progress') {
+    if (activeRide.status === 'live') {
       return (
         <LiveRide
           completeRide={this.completeRide}
