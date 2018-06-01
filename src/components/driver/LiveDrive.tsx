@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import viewportCenter from '../../styles/viewportCenter';
 import { Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import MessageLoader from '../common/MessageLoader';
 import UserDetails from '../../typings/UserDetails';
 import RideDetails from '../../typings/RideDetails';
@@ -9,15 +9,20 @@ import socket from '../../api/socket';
 import { connect } from 'react-redux';
 import { removeActiveDrive as removeActiveDriveAction } from '../../actions/activeDrive';
 
-class LiveDrive extends Component<{
-  completeRide: () => void;
-  rider: UserDetails | null;
-  ride: RideDetails;
-  removeActiveDrive: typeof removeActiveDriveAction;
-}> {
+class LiveDrive extends Component<
+  RouteComponentProps<{}> & {
+    completeRide: () => void;
+    rider: UserDetails | null;
+    ride: RideDetails;
+    removeActiveDrive: typeof removeActiveDriveAction;
+  }
+> {
   componentDidMount() {
-    const { ride, removeActiveDrive } = this.props;
-    socket.once(`complete/${ride.id}`, removeActiveDrive);
+    const { ride, removeActiveDrive, history } = this.props;
+    socket.once(`complete/${ride.id}`, () => {
+      removeActiveDrive();
+      history.push('/');
+    });
   }
   render() {
     const { ride, rider, completeRide } = this.props;
@@ -61,6 +66,6 @@ class LiveDrive extends Component<{
   }
 }
 
-export default connect(undefined, { removeActiveDrive: removeActiveDriveAction })(
-  LiveDrive
+export default withRouter(
+  connect(undefined, { removeActiveDrive: removeActiveDriveAction })(LiveDrive)
 );

@@ -15,12 +15,15 @@ import completeRide from '../../api/update/completeRide';
 import socket from '../../api/socket';
 import getRide from '../../api/read/getRide';
 import RideDetails from '../../typings/RideDetails';
+import { withRouter, RouteComponentProps } from 'react-router';
 
-class ActiveRide extends Component<{
-  removeActiveRide: typeof removeActiveRideAction;
-  setActiveRide: typeof setActiveRideAction;
-  activeRide: RideDetails;
-}> {
+class ActiveRide extends Component<
+  RouteComponentProps<{}> & {
+    removeActiveRide: typeof removeActiveRideAction;
+    setActiveRide: typeof setActiveRideAction;
+    activeRide: RideDetails;
+  }
+> {
   state = { driver: null };
 
   deleteRide = () => deleteRide().then(this.props.removeActiveRide);
@@ -33,8 +36,11 @@ class ActiveRide extends Component<{
   };
 
   completeRide = () => {
-    const { removeActiveRide } = this.props;
-    completeRide().then(removeActiveRide);
+    const { removeActiveRide, history } = this.props;
+    completeRide().then(() => {
+      removeActiveRide();
+      history.push('/');
+    });
   };
 
   updateDriver = () => {
@@ -84,7 +90,9 @@ class ActiveRide extends Component<{
   }
 }
 
-export default connect((state: AppState) => ({ activeRide: state.activeRide }), {
-  removeActiveRide: removeActiveRideAction,
-  setActiveRide: setActiveRideAction
-})(ActiveRide);
+export default withRouter(
+  connect((state: AppState) => ({ activeRide: state.activeRide }), {
+    removeActiveRide: removeActiveRideAction,
+    setActiveRide: setActiveRideAction
+  })(ActiveRide)
+);

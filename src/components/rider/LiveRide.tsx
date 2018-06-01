@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import viewportCenter from '../../styles/viewportCenter';
 import { Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import MessageLoader from '../common/MessageLoader';
 import UserDetails from '../../typings/UserDetails';
 import RideDetails from '../../typings/RideDetails';
@@ -9,15 +9,20 @@ import socket from '../../api/socket';
 import { connect } from 'react-redux';
 import { removeActiveRide as removeActiveRideAction } from '../../actions/activeRide';
 
-class LiveRide extends Component<{
-  completeRide: () => void;
-  driver: UserDetails | null;
-  ride: RideDetails;
-  removeActiveRide: typeof removeActiveRideAction;
-}> {
+class LiveRide extends Component<
+  RouteComponentProps<{}> & {
+    completeRide: () => void;
+    driver: UserDetails | null;
+    ride: RideDetails;
+    removeActiveRide: typeof removeActiveRideAction;
+  }
+> {
   componentDidMount() {
-    const { ride, removeActiveRide } = this.props;
-    socket.once(`complete/${ride.id}`, removeActiveRide);
+    const { ride, removeActiveRide, history } = this.props;
+    socket.once(`complete/${ride.id}`, () => {
+      removeActiveRide();
+      history.push('/');
+    });
   }
 
   render() {
@@ -62,4 +67,6 @@ class LiveRide extends Component<{
   }
 }
 
-export default connect(undefined, { removeActiveRide: removeActiveRideAction })(LiveRide);
+export default withRouter(
+  connect(undefined, { removeActiveRide: removeActiveRideAction })(LiveRide)
+);

@@ -12,12 +12,15 @@ import {
   setActiveDrive as setActiveDriveAction,
   removeActiveDrive as removeActiveDriveAction
 } from '../../actions/activeDrive';
+import { withRouter, RouteComponentProps } from 'react-router';
 
-class ActiveDrive extends Component<{
-  activeDrive: RideDetails;
-  setActiveDrive: typeof setActiveDriveAction;
-  removeActiveDrive: typeof removeActiveDriveAction;
-}> {
+class ActiveDrive extends Component<
+  RouteComponentProps<{}> & {
+    activeDrive: RideDetails;
+    setActiveDrive: typeof setActiveDriveAction;
+    removeActiveDrive: typeof removeActiveDriveAction;
+  }
+> {
   state = { rider: null };
 
   componentDidMount() {
@@ -37,8 +40,11 @@ class ActiveDrive extends Component<{
   };
 
   completeRide = () => {
-    const { removeActiveDrive } = this.props;
-    completeRide().then(removeActiveDrive);
+    const { removeActiveDrive, history } = this.props;
+    completeRide().then(() => {
+      removeActiveDrive();
+      history.push('/');
+    });
   };
 
   render() {
@@ -62,7 +68,9 @@ class ActiveDrive extends Component<{
 }
 
 const mapStateToProps = (state: AppState) => ({ activeDrive: state.activeDrive });
-export default connect(mapStateToProps, {
-  setActiveDrive: setActiveDriveAction,
-  removeActiveDrive: removeActiveDriveAction
-})(ActiveDrive);
+export default withRouter(
+  connect(mapStateToProps, {
+    setActiveDrive: setActiveDriveAction,
+    removeActiveDrive: removeActiveDriveAction
+  })(ActiveDrive)
+);
