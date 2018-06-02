@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import RideDetails from '../typings/RideDetails';
+import RideDetails from '../types/RideDetails';
 
 const setActiveDrive = (ride: RideDetails) => ({
   type: 'SET_ACTIVE_DRIVE',

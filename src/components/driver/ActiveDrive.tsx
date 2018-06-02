@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AppState from '../../typings/AppState';
+import AppState from '../../types/AppState';
 import WaitingRiderConfirmation from './WaitingRiderConfirmation';
 import LiveDrive from './LiveDrive';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import getUser from '../../api/read/getUser';
 import socket from '../../api/socket';
 import completeRide from '../../api/update/completeRide';
 import unmatchDriver from '../../api/update/unmatchDriver';
-import RideDetails from '../../typings/RideDetails';
+import RideDetails from '../../types/RideDetails';
 import {
   setActiveDrive as setActiveDriveAction,
   removeActiveDrive as removeActiveDriveAction

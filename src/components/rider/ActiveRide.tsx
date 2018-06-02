@@ -6,7 +6,7 @@ import {
   setActiveRide as setActiveRideAction
 } from '../../actions/activeRide';
 import { connect } from 'react-redux';
-import AppState from '../../typings/AppState';
+import AppState from '../../types/AppState';
 import DriverFound from './DriverFound';
 import getUser from '../../api/read/getUser';
 import confirmRide from '../../api/update/confirmRide';
@@ -14,7 +14,7 @@ import LiveRide from './LiveRide';
 import completeRide from '../../api/update/completeRide';
 import socket from '../../api/socket';
 import getRide from '../../api/read/getRide';
-import RideDetails from '../../typings/RideDetails';
+import RideDetails from '../../types/RideDetails';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 class ActiveRide extends Component<

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import center from '../../styles/center';
 import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 import { connect } from 'react-redux';
-import AppState from '../../typings/AppState';
+import AppState from '../../types/AppState';
 import { setUserLocation as setUserLocationAction } from '../../actions/userLocation';
 import { clientError as clientErrorAction } from '../../actions/fallbackError';
 import { setActiveRide as setActiveRideAction } from '../../actions/activeRide';
@@ -12,7 +12,7 @@ import RideConfirmation from '../../components/rider/RideConfirmation';
 import MessageLoader from '../../components/common/MessageLoader';
 import getUserLocation from '../../utils/getUserLocation';
 import SidebarTitle from '../../components/common/SidebarTitle';
-import UserDetails from '../../typings/UserDetails';
+import UserDetails from '../../types/UserDetails';
 
 class RideCreation extends Component<{
   setUserLocation: typeof setUserLocationAction;

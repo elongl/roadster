@@ -1,6 +1,6 @@
 import React, { StatelessComponent } from 'react';
 import { Card, Image } from 'semantic-ui-react';
-import UserRide from '../../typings/UserRide';
+import UserRide from '../../types/UserRide';
 import { Link } from 'react-router-dom';
 
 const RideCard: StatelessComponent<{

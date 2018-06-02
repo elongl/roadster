@@ -8,7 +8,7 @@ const WaitingForDriver: StatelessComponent<{ deleteRide: () => void }> = ({
   <div style={{ ...viewportCenter, color: 'white' }}>
     <h2 style={{ margin: '0.5rem' }}>The driver hunt has begun!</h2>
     <h3 style={{ margin: 0, fontStyle: 'italic' }}>
-      You will be notified once we find a driver.
+      You will be notified once we find a driver via SMS.
       <span style={{ display: 'block' }}>(You can close the app in the meanwhile)</span>
     </h3>
     <Button

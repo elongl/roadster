@@ -1,4 +1,4 @@
-import AppState from '../typings/AppState';
+import AppState from '../types/AppState';
 import { ActiveDriveAction } from '../actions/activeDrive';
 import { Reducer } from 'redux';
 

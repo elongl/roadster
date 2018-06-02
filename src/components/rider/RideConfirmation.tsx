@@ -1,7 +1,7 @@
 import React, { StatelessComponent } from 'react';
 import DirectionsMap from '../maps/DirectionsMap';
 import { Segment, Button } from 'semantic-ui-react';
-import AppState from '../../typings/AppState';
+import AppState from '../../types/AppState';
 import MessageLoader from '../common/MessageLoader';
 
 const RideConfirmation: StatelessComponent<{

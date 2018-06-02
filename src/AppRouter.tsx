@@ -13,7 +13,7 @@ import Support from './pages/Support';
 import SidebarMenu from './components/common/SidebarMenu';
 import Logout from './components/authentication/Logout';
 import { connect } from 'react-redux';
-import AppState from './typings/AppState';
+import AppState from './types/AppState';
 import MessageLoader from './components/common/MessageLoader';
 
 class AppRouter extends Component<

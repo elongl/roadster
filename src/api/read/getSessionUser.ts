@@ -1,5 +1,5 @@
 import request from '../request';
-import UserDetails from '../../typings/UserDetails';
+import UserDetails from '../../types/UserDetails';
 const getSessionUser = async () => {
   try {
     const { data: user } = await request.get('/auth/user');

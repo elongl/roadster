@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import UserDetails from '../typings/UserDetails';
+import UserDetails from '../types/UserDetails';
 
 const loginUser = (user: UserDetails) => ({
   type: 'USER_LOGIN',

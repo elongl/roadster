@@ -1,4 +1,4 @@
-import AppState from '../typings/AppState';
+import AppState from '../types/AppState';
 import { ErrorAction } from '../actions/fallbackError';
 import { Reducer } from 'redux';
 

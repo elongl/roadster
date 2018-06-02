@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Error from './Error';
-import AppState from '../../typings/AppState';
+import AppState from '../../types/AppState';
 import { clientError } from '../../actions/fallbackError';
 
 class ErrorBoundary extends Component<{

@@ -5,7 +5,7 @@ import { Segment, Button, Loader, Dimmer } from 'semantic-ui-react';
 import center from '../../styles/center';
 import DirectionsMap from '../maps/DirectionsMap';
 import { connect } from 'react-redux';
-import AppState from '../../typings/AppState';
+import AppState from '../../types/AppState';
 import { clientError as clientErrorAction } from '../../actions/fallbackError';
 import { setUserLocation as setUserLocationAction } from '../../actions/userLocation';
 import getUserLocation from '../../utils/getUserLocation';

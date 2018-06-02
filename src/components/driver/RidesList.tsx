@@ -2,15 +2,15 @@ import React, { StatelessComponent } from 'react';
 import center from '../../styles/center';
 import { TransitionGroup, Loader } from 'semantic-ui-react';
 import RideCard from './RideCard';
-import UserRide from '../../typings/UserRide';
+import UserRide from '../../types/UserRide';
 import { connect } from 'react-redux';
-import AppState from '../../typings/AppState';
+import AppState from '../../types/AppState';
 
 const RidesList: StatelessComponent<{
   waitingRides: AppState['waitingRides'];
 }> = ({ waitingRides }) => (
   <TransitionGroup
-    animation="scale"
+    animation="fade down"
     style={{ ...center, width: '100%', marginTop: '1rem' }}
   >
     {waitingRides ? (

@@ -1,5 +1,5 @@
 import request from '../request';
-import RideDetails from '../../typings/RideDetails';
+import RideDetails from '../../types/RideDetails';
 
 const getUserDrive = async () => {
   try {

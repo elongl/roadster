@@ -1,5 +1,5 @@
 import React, { StatelessComponent } from 'react';
-import UserDetails from '../../typings/UserDetails';
+import UserDetails from '../../types/UserDetails';
 import MessageLoader from '../common/MessageLoader';
 import { Image, Button } from 'semantic-ui-react';
 import viewportCenter from '../../styles/viewportCenter';

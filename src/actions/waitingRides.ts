@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import UserRide from '../typings/UserRide';
+import UserRide from '../types/UserRide';
 
 const setWaitingRides = (waitingRides: UserRide[]) => ({
   type: 'SET_WAITING_RIDES',

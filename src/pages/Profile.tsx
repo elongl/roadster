@@ -2,8 +2,8 @@ import React, { StatelessComponent } from 'react';
 import viewportCenter from '../styles/viewportCenter';
 import { connect } from 'react-redux';
 import { Image } from 'semantic-ui-react';
-import UserDetails from '../typings/UserDetails';
-import AppState from '../typings/AppState';
+import UserDetails from '../types/UserDetails';
+import AppState from '../types/AppState';
 
 const Profile: StatelessComponent<{
   user: UserDetails;

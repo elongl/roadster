@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AppState from '../typings/AppState';
+import AppState from '../types/AppState';
 import getUser from '../api/read/getUser';
 import { connect } from 'react-redux';
 import { setWaitingRides } from '../actions/waitingRides';
@@ -13,7 +13,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import getWaitingRides from '../api/read/getWaitingRides';
-import RideDetails from '../typings/RideDetails';
+import RideDetails from '../types/RideDetails';
 import ActiveDrive from '../components/driver/ActiveDrive';
 import socket from '../api/socket';
 

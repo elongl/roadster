@@ -1,7 +1,7 @@
 import React, { ComponentType, StatelessComponent } from 'react';
 import { connect } from 'react-redux';
 import { RouteProps, Route, Redirect } from 'react-router-dom';
-import AppState from '../../typings/AppState';
+import AppState from '../../types/AppState';
 
 const DriverRoute: StatelessComponent<
   RouteProps & {

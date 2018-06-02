@@ -2,7 +2,7 @@ import React, { StatelessComponent } from 'react';
 import viewportCenter from '../../styles/viewportCenter';
 import { Image, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import UserDetails from '../../typings/UserDetails';
+import UserDetails from '../../types/UserDetails';
 import MessageLoader from '../common/MessageLoader';
 const WaitingRiderConfirmation: StatelessComponent<{
   rider: UserDetails | null;

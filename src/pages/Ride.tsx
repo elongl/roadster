@@ -1,7 +1,7 @@
 import React, { StatelessComponent } from 'react';
 import RideCreation from '../components/rider/RideCreation';
 import { connect } from 'react-redux';
-import AppState from '../typings/AppState';
+import AppState from '../types/AppState';
 import ActiveRide from '../components/rider/ActiveRide';
 import { Redirect } from 'react-router';
 

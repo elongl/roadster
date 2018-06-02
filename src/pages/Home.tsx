@@ -2,7 +2,7 @@ import React, { StatelessComponent } from 'react';
 import { Divider, Button, Icon, SemanticICONS } from 'semantic-ui-react';
 import viewportCenter from '../styles/viewportCenter';
 import { Link } from 'react-router-dom';
-import AppState from '../typings/AppState';
+import AppState from '../types/AppState';
 import { connect } from 'react-redux';
 
 const LinkButton: StatelessComponent<{

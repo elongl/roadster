@@ -1,7 +1,7 @@
 import React, { StatelessComponent } from 'react';
 import Registration from '../components/authentication/Registration';
 import { connect } from 'react-redux';
-import AppState from '../typings/AppState';
+import AppState from '../types/AppState';
 import Introduction from '../components/authentication/Introduction';
 import { Redirect } from 'react-router';
 

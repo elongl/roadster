@@ -1,4 +1,4 @@
-import AppState from '../typings/AppState';
+import AppState from '../types/AppState';
 import { ActiveRideAction } from '../actions/activeRide';
 import { Reducer } from 'redux';
 
