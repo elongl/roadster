@@ -45,23 +45,35 @@ class ActiveRide extends Component<
 
   updateDriver = () => {
     const { activeRide } = this.props;
-    if (activeRide && activeRide.driverId) {
+    if (activeRide.driverId) {
       getUser(activeRide.driverId).then(driver => this.setState({ driver }));
     }
   };
 
-  async componentDidMount() {
+  lookForDrivers = () => {
     const { setActiveRide, activeRide } = this.props;
-    if (activeRide && !activeRide.driverId) {
-      socket.on(`matchdriver/${activeRide.id}`, async () => {
-        const activeRideWithDriver = await getRide(activeRide.id);
-        setActiveRide(activeRideWithDriver);
-        this.updateDriver();
-        socket.on(`unmatchdriver/${activeRide.id}`, async () => {
-          setActiveRide({ ...activeRide, driverId: null, status: 'waiting' });
-        });
-      });
+    socket.once(`matchdriver/${activeRide.id}`, async () => {
+      const activeRideWithDriver = await getRide(activeRide.id);
+      setActiveRide(activeRideWithDriver);
+      this.listenForUnmatch();
+      this.updateDriver();
+    });
+  };
+
+  listenForUnmatch = () => {
+    const { setActiveRide, activeRide } = this.props;
+    socket.once(`unmatchdriver/${activeRide.id}`, async () => {
+      setActiveRide({ ...activeRide, driverId: null, status: 'waiting' });
+      this.lookForDrivers();
+    });
+  };
+
+  async componentDidMount() {
+    const { activeRide } = this.props;
+    if (!activeRide.driverId) {
+      this.lookForDrivers();
     } else {
+      this.listenForUnmatch();
       this.updateDriver();
     }
   }
@@ -91,8 +103,11 @@ class ActiveRide extends Component<
 }
 
 export default withRouter(
-  connect((state: AppState) => ({ activeRide: state.activeRide }), {
-    removeActiveRide: removeActiveRideAction,
-    setActiveRide: setActiveRideAction
-  })(ActiveRide)
+  connect(
+    (state: AppState) => ({ activeRide: state.activeRide }),
+    {
+      removeActiveRide: removeActiveRideAction,
+      setActiveRide: setActiveRideAction
+    }
+  )(ActiveRide)
 );

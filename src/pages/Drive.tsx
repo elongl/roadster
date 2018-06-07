@@ -24,6 +24,7 @@ class Drive extends Component<
     setWaitingRides: typeof setWaitingRides;
   } & RouteComponentProps<{}>
 > {
+  state = { loading: true };
   setWaitingRides = async () => {
     const waitingRides = await getWaitingRides();
     const userRides = await Promise.all(
@@ -38,10 +39,19 @@ class Drive extends Component<
   async componentDidMount() {
     await this.setWaitingRides();
     socket.on('rideslist_changed', this.setWaitingRides);
+    this.setState({ loading: false });
+  }
+
+  componentWillUnmount() {
+    socket.off('rideslist_changed');
   }
 
   render() {
     const { isActiveRide, isActiveDrive } = this.props;
+    const { loading } = this.state;
+    if (loading) {
+      return null;
+    }
     if (isActiveRide) {
       return <Redirect to="/ride" />;
     }
@@ -61,4 +71,9 @@ const mapStateToProps = (state: AppState) => ({
   isActiveRide: Boolean(state.activeRide),
   isActiveDrive: Boolean(state.activeDrive)
 });
-export default withRouter(connect(mapStateToProps, { setWaitingRides })(Drive));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { setWaitingRides }
+  )(Drive)
+);
