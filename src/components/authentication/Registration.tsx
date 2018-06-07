@@ -3,9 +3,14 @@ import PhoneNumberForm from './PhoneNumberForm';
 import IsDriverForm from './IsDriverForm';
 import viewportCenter from '../../styles/viewportCenter';
 import updateUser from '../../api/update/updateUser';
+import { withRouter, RouteComponentProps } from 'react-router';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/user';
+import AppState from '../../types/AppState';
+import UserDetails from '../../types/UserDetails';
 
 class Registration extends Component<
-  {},
+  { loginUser: typeof loginUser; user: UserDetails } & RouteComponentProps<{}>,
   { stage: number; phoneNumber: string; isDriver: boolean | undefined }
 > {
   state = {
@@ -19,10 +24,14 @@ class Registration extends Component<
   changeIsDriver = (isDriver: boolean) => this.setState({ isDriver }, this.updateUser);
 
   updateUser = () => {
-    const phoneNumber = '0' + this.state.phoneNumber.replace('-', '');
     const { isDriver } = this.state;
+    const { user, history, loginUser: setUser } = this.props;
+    const phoneNumber = '0' + this.state.phoneNumber.replace('-', '');
     updateUser({ phoneNumber, isDriver }).then(this.pushStage);
-    setTimeout(() => location.replace('/'), 2750);
+    setTimeout(() => {
+      setUser({ ...user, phoneNumber, isDriver });
+      history.push('/');
+    }, 2750);
   };
 
   pushStage = () => {
@@ -53,4 +62,9 @@ class Registration extends Component<
     );
   }
 }
-export default Registration;
+export default withRouter(
+  connect(
+    (state: AppState) => ({ user: state.user }),
+    { loginUser }
+  )(Registration)
+);

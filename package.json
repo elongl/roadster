@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "emotion": "^9.1.1",
+    "lodash": "^4.17.10",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-emotion": "^9.1.1",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@types/googlemaps": "^3.30.8",
     "@types/jest": "^22.2.2",
+    "@types/lodash": "^4.14.109",
     "@types/markerclustererplus": "^2.1.33",
     "@types/node": "^9.6.2",
     "@types/react": "^16.3.14",
