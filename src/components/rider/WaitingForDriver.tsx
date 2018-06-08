@@ -2,9 +2,10 @@ import React, { StatelessComponent } from 'react';
 import viewportCenter from '../../styles/viewportCenter';
 import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-const WaitingForDriver: StatelessComponent<{ deleteRide: () => void }> = ({
-  deleteRide
-}) => (
+const WaitingForDriver: StatelessComponent<{
+  rideId: number;
+  deleteRide: () => void;
+}> = ({ deleteRide, rideId }) => (
   <div style={{ ...viewportCenter, color: 'white' }}>
     <h2 style={{ margin: '0.5rem' }}>The driver hunt has begun!</h2>
     <h3 style={{ margin: 0, fontStyle: 'italic' }}>
@@ -21,6 +22,17 @@ const WaitingForDriver: StatelessComponent<{ deleteRide: () => void }> = ({
       to="/"
       style={{ marginTop: '1.5rem', width: '70%' }}
       onClick={deleteRide}
+    />
+    <Button
+      color="green"
+      size="big"
+      as="a"
+      content="Share via Whatsapp"
+      icon="whatsapp"
+      href={`whatsapp://send?text=Can you please pick me up? ${
+        process.env.REACT_APP_SERVER_URL
+      }/drive/${rideId}`}
+      style={{ marginTop: '1rem', width: '70%' }}
     />
   </div>
 );

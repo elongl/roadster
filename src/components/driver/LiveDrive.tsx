@@ -51,18 +51,15 @@ class LiveDrive extends Component<
           </h3>
         </div>
         <Button
+          as="a"
           size="big"
           content="Get Directions"
           icon="map"
           labelPosition="right"
           style={{ marginTop: '1.5rem', width: '70%' }}
-          onClick={() =>
-            location.replace(
-              `https://www.google.com/maps/dir/?api=1&waypoints=${
-                ride.origin
-              }&destination=${ride.destination}`
-            )
-          }
+          href={`https://www.google.com/maps/dir/?api=1&waypoints=${
+            ride.origin
+          }&destination=${ride.destination}`}
         />
         <Button
           positive

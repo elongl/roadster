@@ -18,13 +18,14 @@ const ContactButton: StatelessComponent<{
   color: ButtonProps['color'];
 }> = ({ content, icon, color, link }) => (
   <Button
+    as="a"
     fluid
     size="big"
     content={content}
     icon={icon}
     color={color}
     style={{ marginTop: '0.5rem' }}
-    onClick={() => location.replace(link)}
+    href={link}
   />
 );
 

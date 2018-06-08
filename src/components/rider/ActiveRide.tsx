@@ -98,7 +98,7 @@ class ActiveRide extends Component<
         />
       );
     }
-    return <WaitingForDriver deleteRide={this.deleteRide} />;
+    return <WaitingForDriver rideId={activeRide.id} deleteRide={this.deleteRide} />;
   }
 }
 

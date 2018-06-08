@@ -22,13 +22,14 @@ const Error: StatelessComponent<ErrorProps> = ({ header, content }) => (
     <h2>{header}</h2>
     <h3 style={{ width: '60%', fontWeight: 100, fontStyle: 'italic' }}>{content}</h3>
     <Button
+      as="a"
       inverted
       negative
       circular
       icon="repeat"
       size="big"
       content="Try Again"
-      onClick={() => location.replace('/')}
+      href="/"
     />
   </div>
 );
