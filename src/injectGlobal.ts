@@ -16,23 +16,4 @@ html, body {
         font-size: 35px;
     }
 }
-
-.fade {
-    &-enter,
-    &-exit {
-        transition: opacity 300ms linear;
-    }
-    &-enter {
-        opacity: 0;
-        &-active {
-            opacity: 1;
-        }
-    }
-    &-exit {
-        opacity: 1;
-        &-active {
-            opacity: 0;
-        }
-    }
-}
 `);
