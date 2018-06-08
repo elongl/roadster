@@ -22,10 +22,19 @@ class RidePage extends Component<
     userId: number;
   } & RouteComponentProps<{ rideId: number }>
 > {
+  state = { loading: true, locationRejected: false };
   componentDidMount() {
-    const { setUserLocation, userLocation, clientError } = this.props;
+    const { setUserLocation, userLocation } = this.props;
     if (!userLocation) {
-      getUserLocation(loc => setUserLocation(loc), err => clientError(err));
+      getUserLocation(
+        loc => {
+          setUserLocation(loc);
+          this.setState({ loading: false });
+        },
+        err => {
+          this.setState({ locationRejected: true, loading: false });
+        }
+      );
     }
   }
 
@@ -38,6 +47,7 @@ class RidePage extends Component<
       setActiveDrive,
       userId
     } = this.props;
+    const { locationRejected, loading } = this.state;
     if (!waitingRides) {
       return <Loader />;
     }
@@ -71,16 +81,26 @@ class RidePage extends Component<
             </span>
           </Segment>
 
-          {userLocation ? (
+          {!loading ? (
             <>
-              <DirectionsMap
-                containerElement={<div style={{ height: '60vh', width: '90%' }} />}
-                mapElement={<div style={{ height: '100%', borderRadius: '1rem' }} />}
-                origin={userLocation}
-                pickup={ride.origin}
-                destination={ride.destination}
-              />
-
+              {locationRejected ? (
+                <DirectionsMap
+                  containerElement={<div style={{ height: '57.5vh', width: '90%' }} />}
+                  mapElement={<div style={{ height: '100%', borderRadius: '1rem' }} />}
+                  origin={ride.origin}
+                  destination={ride.destination}
+                />
+              ) : (
+                userLocation && (
+                  <DirectionsMap
+                    containerElement={<div style={{ height: '57.5vh', width: '90%' }} />}
+                    mapElement={<div style={{ height: '100%', borderRadius: '1rem' }} />}
+                    origin={userLocation}
+                    pickup={ride.origin}
+                    destination={ride.destination}
+                  />
+                )
+              )}
               <Button.Group size="large" style={{ width: '85%', margin: '1rem' }}>
                 <Button
                   style={{ width: '50%' }}

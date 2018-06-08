@@ -38,7 +38,7 @@ const RideConfirmation: StatelessComponent<{
             alert('We were unable to load your map. Please review your inputs.');
             gotoStage(1);
           }}
-          containerElement={<div style={{ height: '60vh', width: '90%' }} />}
+          containerElement={<div style={{ height: '57.5vh', width: '90%' }} />}
           mapElement={<div style={{ height: '100%', borderRadius: '1rem' }} />}
           destination={destination.value}
           origin={origin.myLocation && userLocation ? userLocation : origin.value}
