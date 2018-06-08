@@ -51,6 +51,20 @@ class LiveDrive extends Component<
           </h3>
         </div>
         <Button
+          size="big"
+          content="Get Directions"
+          icon="map"
+          labelPosition="right"
+          style={{ marginTop: '1.5rem', width: '70%' }}
+          onClick={() =>
+            location.replace(
+              `https://www.google.com/maps/dir/?api=1&waypoints=${
+                ride.origin
+              }&destination=${ride.destination}`
+            )
+          }
+        />
+        <Button
           positive
           size="big"
           icon="checkmark"
@@ -67,5 +81,8 @@ class LiveDrive extends Component<
 }
 
 export default withRouter(
-  connect(undefined, { removeActiveDrive: removeActiveDriveAction })(LiveDrive)
+  connect(
+    undefined,
+    { removeActiveDrive: removeActiveDriveAction }
+  )(LiveDrive)
 );
