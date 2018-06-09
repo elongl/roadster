@@ -16,6 +16,7 @@ import getWaitingRides from '../api/read/getWaitingRides';
 import RideDetails from '../types/RideDetails';
 import ActiveDrive from '../components/driver/ActiveDrive';
 import socket from '../api/socket';
+import MessageLoader from '../components/common/MessageLoader';
 
 class Drive extends Component<
   {
@@ -50,7 +51,7 @@ class Drive extends Component<
     const { isActiveRide, isActiveDrive } = this.props;
     const { loading } = this.state;
     if (loading) {
-      return null;
+      return <MessageLoader>Loading...</MessageLoader>;
     }
     if (isActiveRide) {
       return <Redirect to="/ride" />;
