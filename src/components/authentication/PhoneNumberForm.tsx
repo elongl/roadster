@@ -16,7 +16,7 @@ const PhoneNumberForm: StatelessComponent<{
           type="tel"
           pattern="5\d-?\d{7}"
           title="Israeli phone number"
-          placeholder="58-7070765"
+          placeholder="58-6740784"
           value={phoneNumber}
           onChange={event => changePhoneNumber(event.currentTarget.value)}
           style={{
