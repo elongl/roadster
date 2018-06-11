@@ -30,7 +30,7 @@ const WaitingForDriver: StatelessComponent<{
       content="Share via Whatsapp"
       icon="whatsapp"
       href={`whatsapp://send?text=Can you please pick me up? ${
-        process.env.REACT_APP_SERVER_URL
+        location.origin
       }/drive/${rideId}`}
       style={{ marginTop: '1rem', width: '70%' }}
     />
